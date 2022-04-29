@@ -1,0 +1,79 @@
+﻿<Page x:Class="WPF_Project.Pages.ToolGet"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1600" d:DesignWidth="1080"
+      
+      Title="ToolGet">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TabControl Background="Transparent" BorderThickness="0">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite" 
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="#40000000" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="按工具取还" FontSize="60" Width="536" Height="120" Foreground="White">
+                <Border CornerRadius="10" Background="#30FFFFFF" Margin="30">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Border BorderThickness="0 0 0 1" BorderBrush="#80FFFFFF">
+                            
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Background="Transparent" Foreground="White" BorderThickness="0" Padding="30 20">
+
+                            </TextBox>
+                            <Button Grid.Column="1" Width="120" BorderThickness="0 0 0 0" Style="{DynamicResource ButtonStyle1}">
+                                    <Button.Background>
+                                        <ImageBrush/>
+                                    </Button.Background>
+                                
+                            </Button>
+                        </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem Header="按柜门取还" FontSize="60" Width="540" Height="120" Foreground="White"/>
+        </TabControl>
+        <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Background="#20000000" FontSize="40" Height="100"
+                BorderThickness="0 1 0 1" BorderBrush="#50FFFFFF"
+                Foreground="white">
+            批量取出    
+        </Button>
+    </Grid>
+</Page>

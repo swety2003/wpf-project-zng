@@ -1,0 +1,156 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>WPF_Project</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\AdminView\enter%402x.png" />
+    <None Remove="Assets\AdminView\enter.png" />
+    <None Remove="Assets\AdminView\warning_fill%281%29.png" />
+    <None Remove="Assets\AdminView\warning_fill%282%29.png" />
+    <None Remove="Assets\AdminView\warning_fill%283%29.png" />
+    <None Remove="Assets\AdminView\warning_fill%402x%281%29.png" />
+    <None Remove="Assets\AdminView\warning_fill%402x%282%29.png" />
+    <None Remove="Assets\AdminView\warning_fill%402x%283%29.png" />
+    <None Remove="Assets\AdminView\warning_fill%402x.png" />
+    <None Remove="Assets\AdminView\warning_fill.png" />
+    <None Remove="Assets\AdminView\编组 10%402x.png" />
+    <None Remove="Assets\AdminView\编组 10.png" />
+    <None Remove="Assets\AdminView\编组 8%281%29.png" />
+    <None Remove="Assets\AdminView\编组 8%402x%281%29.png" />
+    <None Remove="Assets\AdminView\编组 8%402x.png" />
+    <None Remove="Assets\AdminView\编组 8.png" />
+    <None Remove="Assets\AdminView\编组%281%29.png" />
+    <None Remove="Assets\AdminView\编组%402x%281%29.png" />
+    <None Remove="Assets\AdminView\编组%402x.png" />
+    <None Remove="Assets\AdminView\编组.png" />
+    <None Remove="Assets\AdminView\退出%402x.png" />
+    <None Remove="Assets\AdminView\退出.png" />
+    <None Remove="Assets\DemoView\bg.png" />
+    <None Remove="Assets\DemoView\系统维护.png" />
+    <None Remove="Assets\enter%402x.png" />
+    <None Remove="Assets\enter.png" />
+    <None Remove="Assets\HomeView\warning_fill%402x%281%29.png" />
+    <None Remove="Assets\HomeView\warning_fill%402x%282%29.png" />
+    <None Remove="Assets\HomeView\warning_fill%402x%283%29.png" />
+    <None Remove="Assets\HomeView\warning_fill%402x.png" />
+    <None Remove="Assets\HomeView\编组 10%402x.png" />
+    <None Remove="Assets\HomeView\首页%402x.png" />
+    <None Remove="Assets\编组 10%402x.png" />
+    <None Remove="Assets\编组 10.png" />
+    <None Remove="Assets\编组 8%281%29.png" />
+    <None Remove="Assets\编组 8%402x%281%29.png" />
+    <None Remove="Assets\编组 8%402x.png" />
+    <None Remove="Assets\编组 8.png" />
+    <None Remove="Assets\退出%402x.png" />
+    <None Remove="Assets\退出.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\HomeView\warning_fill@2x(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeView\warning_fill@2x(2).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeView\warning_fill@2x(3).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeView\warning_fill@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\AdminView\enter.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\enter@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill(2).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill(3).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill@2x(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill@2x(2).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill@2x(3).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\warning_fill@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组 10.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组 10@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组 8(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组 8.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组 8@2x(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组 8@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组@2x(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\编组@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\退出.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\AdminView\退出@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeView\编组 10@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\HomeView\首页@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\MainView\bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\DemoView\系统维护.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\enter@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\退出@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
