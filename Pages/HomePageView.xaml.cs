@@ -29,14 +29,24 @@ namespace WPF_Project.Pages
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            new CustomDialog().ShowDialog();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             StaticValues.MainWindow.NagivateTo(new ToolGet());
-            StaticValues.MainWindow.topBar.Visibility = Visibility.Visible;
-            StaticValues.MainWindow.SetTitle("工具取还");
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            StaticValues.MainWindow.NagivateTo(new AdminLogin());
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+
         }
     }
 }

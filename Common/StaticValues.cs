@@ -13,6 +13,6 @@ namespace WPF_Project.Common
 
         public static Grid Toparea { get; set; }
 
-
+        public static Button scanBtn { get; set; }
     }
 }

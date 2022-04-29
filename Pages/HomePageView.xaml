@@ -7,6 +7,7 @@
       d:DesignHeight="1600" d:DesignWidth="1080"
       mc:Ignorable="d" 
       Title="HomePageView"
+      Loaded="Page_Loaded"
       
       >
 
@@ -23,7 +24,15 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.ColumnSpan="2">
-            <Label HorizontalAlignment="Center" Foreground="White" FontSize="60" Margin="40" MouseDown="Label_MouseDown">I-US3智能工具管理系统</Label>
+            <Grid>
+                <Label HorizontalAlignment="Center" Foreground="White" FontSize="60" Margin="40" MouseDown="Label_MouseDown">I-US3智能工具管理系统</Label>
+                <Button HorizontalAlignment="Right" Width="160" BorderThickness="0" Style="{StaticResource ButtonStyle1}" 
+                        Background="Transparent"
+                        Click="Button_Click_1">
+                    <Image Height="80" Source="..\Assets\setting.png">
+                    </Image>
+                </Button>
+            </Grid>
             <Image Source="..\Assets\HomeView\首页@2x.png"/>
         </StackPanel>
         

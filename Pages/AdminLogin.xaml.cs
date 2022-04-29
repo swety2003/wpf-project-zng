@@ -24,11 +24,28 @@ namespace WPF_Project.Pages
         public AdminLogin()
         {
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NagivateTo(new AdminView());
+            if(passwdBox.Password== "chongdao123")
+            {
+                StaticValues.MainWindow.NagivateTo(new AdminView());
+
+            }
+            else
+            {
+                new ToolGetDialog1("系统提示","密码不正确！").ShowDialog();
+                passwdBox.Password = "";
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            StaticValues.MainWindow.SetTitle("系统维护");
+            StaticValues.Toparea.Visibility = Visibility.Visible;
+
         }
     }
 }

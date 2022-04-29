@@ -41,6 +41,9 @@
     <None Remove="Assets\HomeView\warning_fill%402x.png" />
     <None Remove="Assets\HomeView\编组 10%402x.png" />
     <None Remove="Assets\HomeView\首页%402x.png" />
+    <None Remove="Assets\scan%402x.png" />
+    <None Remove="Assets\setting.png" />
+    <None Remove="Assets\ToolGet\search%402x.png" />
     <None Remove="Assets\编组 10%402x.png" />
     <None Remove="Assets\编组 10.png" />
     <None Remove="Assets\编组 8%281%29.png" />
@@ -148,9 +151,29 @@
     <Resource Include="Assets\enter@2x.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\scan@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\setting.png" />
+    <Resource Include="Assets\ToolGet\search@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\退出@2x.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Dialogs\ToolGetDialog1.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Dialogs\ToolGetDialog1.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:WPF_Project.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1600" d:DesignWidth="1080"
+      Loaded="Page_Loaded"
       Title="AdminLogin">
     <Page.Resources>
         <Style x:Key="FocusVisual">
@@ -73,7 +74,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="系统管理员登录" HorizontalAlignment="Center" Foreground="White" Margin="0 230 0 0" FontSize="45"></TextBlock>
 
-        <PasswordBox  Grid.Row="1" FontSize="40" Background="Transparent" Foreground="White"
+        <PasswordBox x:Name="passwdBox" Grid.Row="1" FontSize="40" Background="Transparent" Foreground="White"
                  Padding="20" Height="100" BorderThickness="0 0 0 1" Margin="80 150 80 0">
         </PasswordBox>
         <StackPanel Grid.Row="2" Margin="0 130  0 0">

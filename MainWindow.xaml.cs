@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using WPF_Project.Common;
+using WPF_Project.Pages;
 
 namespace WPF_Project
 {
@@ -24,12 +25,14 @@ namespace WPF_Project
     {
         private DispatcherTimer dt;
         private MainVM vm=new();
+        public bool IsLogin = false;
         public MainWindow()
         {
 
             InitializeComponent();
             StaticValues.MainWindow = this;
             StaticValues.Toparea = topBar;
+            StaticValues.scanBtn = scanBtn;
             this.DataContext = vm;
             dt = new DispatcherTimer();
 
@@ -53,7 +56,13 @@ namespace WPF_Project
         }
         public void NagivateTo(Page p)
         {
+            if (!IsLogin)
+            {
+                EnsuerLogin();
+                return;
+            }
             rootFrame.Navigate(p);
+
         }
         public string Week()
         {
@@ -80,7 +89,46 @@ namespace WPF_Project
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            var r = new CustomDialog("系统提示","是否退出系统？").ShowDialog();
+            if(r == true)
+            {
+                Environment.Exit(0);
+
+            }
+        }
+
+        private void LoginSuccessBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StaticValues.MainWindow.NagivateTo(new HomePageView());
+        }
+
+        private void loginLabel_Click(object sender, RoutedEventArgs e)
+        {
+            EnsuerLogin();
+        }
+        public bool AcquireLogin()
+        {
+            return true;
+        }
+        public bool EnsuerLogin()
+        {
+
+            if (!IsLogin)
+            {
+
+                new ToolGetDialog1("系统提示","请刷卡或扫脸登录").ShowDialog();
+
+                IsLogin = AcquireLogin();
+                var r=new CustomDialog("系统提示" ,"欢迎你，张三\n 是否快速取还？").ShowDialog();
+                if (r==true)
+                {
+                    StaticValues.MainWindow.NagivateTo(new ToolGet());
+                }
+
+            }
+            return IsLogin;
+
+
         }
     }
     public class MainVM:NotifyBase

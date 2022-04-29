@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:WPF_Project.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1600" d:DesignWidth="1080"
-      
-      Title="ToolGet">
+      Loaded="Page_Loaded"
+      Title="ToolGet" Unloaded="Page_Unloaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,39 +41,143 @@
                 </Style>
             </TabControl.Resources>
             <TabItem Header="按工具取还" FontSize="60" Width="536" Height="120" Foreground="White">
-                <Border CornerRadius="10" Background="#30FFFFFF" Margin="30">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Border BorderThickness="0 0 0 1" BorderBrush="#80FFFFFF">
-                            
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="10" Background="#30FFFFFF" Margin="30">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Background="Transparent" Foreground="White" BorderThickness="0" Padding="30 20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="0 0 0 1" BorderBrush="#80FFFFFF">
 
-                            </TextBox>
-                            <Button Grid.Column="1" Width="120" BorderThickness="0 0 0 0" Style="{DynamicResource ButtonStyle1}">
-                                    <Button.Background>
-                                        <ImageBrush/>
-                                    </Button.Background>
-                                
-                            </Button>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Background="Transparent" Foreground="White" BorderThickness="0" Padding="30 20">
+
+                                    </TextBox>
+                                    <Button Grid.Column="1" Width="120" Background="Transparent" BorderThickness="0 0 0 0" Style="{DynamicResource ButtonStyle1}">
+                                        <Border Height="100" Width="100">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="../Assets/ToolGet/search@2x.png"/>
+
+                                            </Border.Background>
+                                        </Border>
+
+                                    </Button>
+                                </Grid>
+                            </Border>
+
+                            <DataGrid Grid.Row="1" Background="Transparent">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="SnapsToDevicePixels" Value="True" />
+                                        <Setter Property="MinWidth" Value="0" />
+                                        <Setter Property="MinHeight" Value="50" />
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontSize" Value="30" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                                    <Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1" 
+                             BorderBrush="#e6dbba" 
+                              Width="Auto">
+                                                        <Grid >
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ContentPresenter  Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                            <Path x:Name="SortArrow" Visibility="Collapsed" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill"  Grid.Column="2" Width="8" Height="6" Fill="White" Margin="0,0,50,0" 
+                            VerticalAlignment="Center" RenderTransformOrigin="1,1" />
+                                                            <Rectangle Width="1" Fill="#30FFFFFF" HorizontalAlignment="Right" Grid.ColumnSpan="1" />
+                                                        </Grid>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Height" Value="25"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="Auto" MinWidth="25"  Binding="{Binding UserID}" Header="+"/>
+                                    <DataGridTextColumn Width="auto"  Binding="{Binding UserName}" Header="名称"/>
+                                    <DataGridTemplateColumn Width="200" Header="图片">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding image}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Width="auto" Binding="{Binding UserPasswd}" Header="RFID"/>
+                                    <DataGridTextColumn Width="auto" Binding="{Binding UserPhone}" Header="工具位置"/>
+                                    <DataGridTextColumn Width="auto" Binding="{Binding UserEmail}" Header="状态"/>
+                                    <DataGridTemplateColumn Width="auto"  Header="操作">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <Button Content="取用" Tag="{Binding 需要的参数}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
                         </Grid>
-                        </Border>
-                    </Grid>
-                </Border>
-            </TabItem>
-            <TabItem Header="按柜门取还" FontSize="60" Width="540" Height="120" Foreground="White"/>
-        </TabControl>
-        <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Background="#20000000" FontSize="40" Height="100"
+                    </Border>
+
+                    <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Background="#20000000" FontSize="40" Height="100"
                 BorderThickness="0 1 0 1" BorderBrush="#50FFFFFF"
-                Foreground="white">
-            批量取出    
-        </Button>
+                Foreground="white" VerticalAlignment="Bottom"
+                Click="Button_Click">
+                        批量取出
+                    </Button>
+                </Grid>
+            </TabItem>
+            <TabItem Header="按柜门取还" FontSize="60" Width="540" Height="120" Foreground="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Background="Transparent">
+                            
+                        </Button>
+                        <Label Grid.Column="1" Foreground="White" HorizontalAlignment="Center">
+                            #2柜
+                        </Label>
+                        <Button Grid.Column="2" Background="Transparent">
+                            
+                        </Button>
+                    </Grid>
+                    <Border Grid.Row="1"  CornerRadius="10" Background="#30FFFFFF" Margin="30 10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            
+
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>
