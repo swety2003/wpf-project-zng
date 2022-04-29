@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_Project.Common;
+using WPF_Project.Dialogs;
+using WpfWidgetDesktop.Utils;
 
 namespace WPF_Project.Pages
 {
@@ -21,14 +24,63 @@ namespace WPF_Project.Pages
     /// </summary>
     public partial class AdminLogin : Page
     {
+        private class CFG
+        {
+            public string ip { get; set; }
+            public string port { get; set; }
+        }
+        private string GUID = "core.admin";
+        private CFG cfg;
         public AdminLogin()
         {
             InitializeComponent();
 
+
         }
 
+
+        private void SetCFG()
+        {
+
+            var d = new SimpleInput();
+            var a = d.ShowDialog();
+
+            if (a == true)
+            {
+                MessageBox.Show(d.Result[0]+d.Result[1]);
+                cfg = new CFG();
+                cfg.ip = d.Result[0];
+                cfg.port = d.Result[1];
+
+                SettingProvider.Set(GUID, cfg);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void CheckCfg()
+        {
+            try
+            {
+                cfg = JsonConvert.DeserializeObject<CFG>(SettingProvider.Get(GUID));
+
+                if (cfg == null)
+                {
+                    SetCFG();
+                }
+            }
+            catch (Exception ex)
+            {
+                SetCFG();
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            CheckCfg();
+
+
             if(passwdBox.Password== "chongdao123")
             {
                 StaticValues.MainWindow.NagivateTo(new AdminView());
@@ -46,6 +98,8 @@ namespace WPF_Project.Pages
             StaticValues.MainWindow.SetTitle("系统维护");
             StaticValues.Toparea.Visibility = Visibility.Visible;
 
+
+            CheckCfg();
         }
     }
 }

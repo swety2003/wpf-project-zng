@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using WPF_Project.Common;
 using WPF_Project.Pages;
+using WpfWidgetDesktop.Utils;
 
 namespace WPF_Project
 {
@@ -92,6 +93,8 @@ namespace WPF_Project
             var r = new CustomDialog("系统提示","是否退出系统？").ShowDialog();
             if(r == true)
             {
+
+                SettingProvider.Save();
                 Environment.Exit(0);
 
             }
