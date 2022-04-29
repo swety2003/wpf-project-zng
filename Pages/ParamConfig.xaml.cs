@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_Project.Common;
 
 namespace WPF_Project.Pages
 {
@@ -23,6 +24,18 @@ namespace WPF_Project.Pages
         public ParamConfig()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            StaticValues.MainWindow.SetTitle("参数配置");
+            StaticValues.Toparea.Visibility = Visibility.Visible;
+        }
+
+        private void ScrollViewer_ManipulationBoundaryFeedback(object sender, ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

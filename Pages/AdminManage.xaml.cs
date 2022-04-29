@@ -17,24 +17,19 @@ using WPF_Project.Common;
 namespace WPF_Project.Pages
 {
     /// <summary>
-    /// AdminView.xaml 的交互逻辑
+    /// AdminManage.xaml 的交互逻辑
     /// </summary>
-    public partial class AdminView : Page
+    public partial class AdminManage : Page
     {
-        public AdminView()
+        public AdminManage()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NagivateTo(new ParamConfig());
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            StaticValues.MainWindow.NagivateTo(new AdminManage());
-
+            StaticValues.MainWindow.SetTitle("管理员");
+            StaticValues.Toparea.Visibility = Visibility.Visible;
         }
     }
 }

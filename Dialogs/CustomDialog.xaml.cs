@@ -28,7 +28,6 @@ namespace WPF_Project
         public CustomDialog(string title,string msg,string[] btnText=null)
         {
             InitializeComponent();
-            StaticValues.MainWindow.LoginSuccess();
             this.MTitle = title;
             this.Msg = msg;
             if (btnText != null)

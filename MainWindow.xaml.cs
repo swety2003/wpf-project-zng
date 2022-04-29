@@ -119,12 +119,22 @@ namespace WPF_Project
                 new ToolGetDialog1("系统提示","请刷卡或扫脸登录").ShowDialog();
 
                 IsLogin = AcquireLogin();
+                if (IsLogin)
+                {
+                    LoginSuccess();
+
+                }
                 var r=new CustomDialog("系统提示" ,"欢迎你，张三\n 是否快速取还？").ShowDialog();
                 if (r==true)
                 {
                     StaticValues.MainWindow.NagivateTo(new ToolGet());
+
                 }
 
+            }
+            else
+            {
+                LoginSuccess();
             }
             return IsLogin;
 
