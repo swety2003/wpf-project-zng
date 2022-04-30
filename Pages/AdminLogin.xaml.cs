@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,6 @@ namespace WPF_Project.Pages
         public AdminLogin()
         {
             InitializeComponent();
-
 
         }
 
@@ -76,21 +76,44 @@ namespace WPF_Project.Pages
                 SetCFG();
             }
         }
+
+        public async Task TryLoginAsync()
+        {
+
+            CheckCfg();
+            var id = "admin";
+            var r = await API.AdminLogin.LoginAsync(id, passwdBox.Password);
+            try
+            {
+
+                JObject o = JObject.Parse(r);
+
+                int code = (int)o["code"];
+
+                if (code == 200)
+                {
+                    StaticValues.MainWindow.NagivateTo(new AdminView());
+
+                }
+                else
+                {
+
+                    new ToolGetDialog1("系统提示", "密码不正确！").ShowDialog();
+                    passwdBox.Password = "";
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show("网络错误/服务端错误!");
+            }
+
+
+
+
+
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CheckCfg();
-
-
-            if(passwdBox.Password== "chongdao123")
-            {
-                StaticValues.MainWindow.NagivateTo(new AdminView());
-
-            }
-            else
-            {
-                new ToolGetDialog1("系统提示","密码不正确！").ShowDialog();
-                passwdBox.Password = "";
-            }
+            TryLoginAsync();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -73,8 +73,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="DataGridColumnHeader">
-                        <Border x:Name="BackgroundBorder" BorderThickness="0" 
-                             BorderBrush="#e6dbba" 
+                        <Border x:Name="BackgroundBorder" BorderThickness="1"
+                             BorderBrush="#40FFFFFF" 
                               Width="Auto">
                             <Grid >
                                 <Grid.ColumnDefinitions>

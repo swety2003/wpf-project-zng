@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_Project.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="1450" d:DesignWidth="1000"
+      d:DesignHeight="14500" d:DesignWidth="1000"
       Title="ParamConfig"
       Loaded="Page_Loaded"
       
@@ -671,31 +671,65 @@
                 <Label Margin="20">
                     开关量模块
                 </Label>
-                <Button Grid.Column="1" Style="{DynamicResource ButtonStyle1}" Background="#30FFFFFF" Margin="20 0" Height="70"  BorderThickness="1" BorderBrush="White"
+                <Button Grid.Column="1" Style="{DynamicResource ButtonStyle1}" Click="Button_Click_2" Background="#30FFFFFF" Margin="20 0" Height="70"  BorderThickness="1" BorderBrush="White"
                    >
-                    <TextBlock Text="   添加   " Foreground="White" FontSize="40" />
+                    <TextBlock Text="   添加   " Foreground="White" FontSize="40"/>
                 </Button>
             </Grid>
-            <Label Margin="20">
-            </Label>
             <Border Background="#30FFFFFF" CornerRadius="10">
                 <StackPanel>
-                    <DataGrid Grid.Row="1" Background="Transparent" BorderThickness="0" Margin="20">
+                    <DataGrid Grid.Row="1" x:Name="switchDG" Background="Transparent" BorderThickness="0" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False"
+                              ItemsSource="{Binding SwitchList.rows}" CanUserSortColumns="False" SelectionMode="Single">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource datagridstyle}">
-
                             </Style>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="FontSize" Value="30"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DataGridCell">
+                                            <Border x:Name="Bg"  Background="Transparent" UseLayoutRounding="True">
+                                                <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontSize" Value="30"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#40FFFFFF"/>
+                                    </Trigger>
+
+                                </Style.Triggers>
+                            </Style>
+
+                            <Style TargetType="DataGrid">
+                                <Setter Property="HorizontalGridLinesBrush" Value="#40FFFFFF"/>
+                                <Setter Property="VerticalGridLinesBrush" Value="#40FFFFFF"/>
+                            </Style>
+                            
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*"  Binding="{Binding UserName}" Header="开关量名称"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserPasswd}" Header="IP地址"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserPhone}" Header="端口号"/>
+                            <DataGridTextColumn Width="*" FontSize="30" Binding="{Binding switchName}" Header="开关量名称"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding switchIp}" Header="IP地址"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding switchPort}" Header="端口号"/>
                             <DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="模块地址"/>
                             <DataGridTemplateColumn Width="*"  Header="操作">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Button Content="取用" Tag="{Binding 需要的参数}" />
+                                            <Button Content="编辑 " Style="{StaticResource ButtonStyle1}" Foreground="Gold" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click"/>
+                                            <Button Content=" 删除" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click_1"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
