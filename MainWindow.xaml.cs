@@ -55,12 +55,16 @@ namespace WPF_Project
             titleTB.Text = title;
 
         }
-        public void NagivateTo(Page p)
+        public void NagivateTo(Page p,bool ensuerLogin=true)
         {
-            if (!IsLogin)
+            if (ensuerLogin)
             {
-                EnsuerLogin();
-                return;
+
+                if (!IsLogin)
+                {
+                    EnsuerLogin();
+                    return;
+                }
             }
             rootFrame.Navigate(p);
 

@@ -39,7 +39,7 @@ namespace WPF_Project.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NagivateTo(new AdminLogin());
+            StaticValues.MainWindow.NagivateTo(new AdminLogin(),false);
 
         }
 

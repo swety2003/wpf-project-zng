@@ -92,12 +92,14 @@ namespace WPF_Project.Pages
 
                 if (code == 200)
                 {
+                    StaticValues.MainWindow.IsLogin = true;
+
                     StaticValues.MainWindow.NagivateTo(new AdminView());
+
 
                 }
                 else
                 {
-
                     new ToolGetDialog1("系统提示", "密码不正确！").ShowDialog();
                     passwdBox.Password = "";
                 }

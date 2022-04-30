@@ -91,5 +91,45 @@
             </Setter>
             <Setter Property="Height" Value="25"/>
         </Style>
+
+
+        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource datagridstyle}">
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border x:Name="Bg"  Background="Transparent" UseLayoutRounding="True">
+                            <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontSize" Value="30"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#40FFFFFF"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="HorizontalGridLinesBrush" Value="#40FFFFFF"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#40FFFFFF"/>
+        </Style>
+
+
     </Application.Resources>
 </Application>

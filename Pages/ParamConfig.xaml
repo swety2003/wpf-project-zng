@@ -515,11 +515,10 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" Margin="20 0">服务端IP</Label>
-                    <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
-                         FontSize="40" Foreground="White" Padding="30"
+                        <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
+                         FontSize="40" Foreground="White" Padding="30" Text="{Binding SysIP}"
                          >
-                        192.168.1.2
-                    </TextBox>
+                        </TextBox>
                 </Grid>
                 
                 <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
@@ -530,11 +529,10 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" Margin="20 0">端口号</Label>
-                    <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
-                         FontSize="40" Foreground="White" Padding="30"
+                        <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
+                         FontSize="40" Foreground="White" Padding="30" Text="{Binding SysPort}"
                          >
-                        9003
-                    </TextBox>
+                        </TextBox>
                 </Grid>
             </StackPanel>
         </Border>
@@ -584,16 +582,11 @@
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">柜组选择</Label>
                     <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"  FontSize="60" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right"
-                              Style="{DynamicResource ComboBoxStyle1}" BorderThickness="0" Background="Transparent" Grid.Column="1" Width="500">
-                        <ComboBoxItem Foreground="White" FontSize="60">
-                            sdawef
-                        </ComboBoxItem>
-                        <ComboBoxItem Foreground="White" FontSize="60">
-                            sdawef
-                        </ComboBoxItem>
-                        <ComboBoxItem Foreground="White" FontSize="60">
-                            sdawef
-                        </ComboBoxItem>
+                              
+                              DisplayMemberPath="cabinetgroupName"
+                              
+                              ItemsSource="{Binding CabinetGroupList.rows}" Style="{DynamicResource ComboBoxStyle1}" BorderThickness="0" Background="Transparent" Grid.Column="1" Width="500">
+
                     </ComboBox>
                 
                 </Grid>
@@ -679,51 +672,13 @@
             <Border Background="#30FFFFFF" CornerRadius="10">
                 <StackPanel>
                     <DataGrid Grid.Row="1" x:Name="switchDG" Background="Transparent" BorderThickness="0" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False"
-                              ItemsSource="{Binding SwitchList.rows}" CanUserSortColumns="False" SelectionMode="Single">
-                        <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource datagridstyle}">
-                            </Style>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter Property="FontSize" Value="30"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="DataGridCell">
-                                            <Border x:Name="Bg"  Background="Transparent" UseLayoutRounding="True">
-                                                <ContentPresenter  HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Foreground" Value="White" />
-                                        <Setter Property="FontSize" Value="30"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-
-                            <Style TargetType="DataGridRow">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="#40FFFFFF"/>
-                                    </Trigger>
-
-                                </Style.Triggers>
-                            </Style>
-
-                            <Style TargetType="DataGrid">
-                                <Setter Property="HorizontalGridLinesBrush" Value="#40FFFFFF"/>
-                                <Setter Property="VerticalGridLinesBrush" Value="#40FFFFFF"/>
-                            </Style>
-                            
-                        </DataGrid.Resources>
+                              ItemsSource="{Binding SwitchList.rows,Mode=TwoWay}" CanUserSortColumns="False" SelectionMode="Single">
+                        
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" FontSize="30" Binding="{Binding switchName}" Header="开关量名称"/>
                             <DataGridTextColumn Width="*" Binding="{Binding switchIp}" Header="IP地址"/>
                             <DataGridTextColumn Width="*" Binding="{Binding switchPort}" Header="端口号"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="模块地址"/>
+                            <!--<DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="模块地址"/>-->
                             <DataGridTemplateColumn Width="*"  Header="操作">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -745,7 +700,7 @@
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
                 <Label Margin="20">
-                    RFID 天线 
+                    RFID 天线
                 </Label>
                 <Button Grid.Column="1" Style="{DynamicResource ButtonStyle1}" Background="#30FFFFFF" Margin="20 0" Height="70"  BorderThickness="1" BorderBrush="White"
                    >
@@ -754,22 +709,19 @@
             </Grid>
             <Border Background="#30FFFFFF" CornerRadius="10">
                 <StackPanel>
-                    <DataGrid Grid.Row="1" Background="Transparent" BorderThickness="0" Margin="20">
-                        <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource datagridstyle}">
-
-                            </Style>
-                        </DataGrid.Resources>
+                    <DataGrid Grid.Row="1" x:Name="antennaDG" Background="Transparent" BorderThickness="0" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False"
+                              ItemsSource="{Binding AntennaGroup.rows,Mode=TwoWay}" CanUserSortColumns="False" SelectionMode="Single">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*"  Binding="{Binding UserName}" Header="天线组名称"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserPasswd}" Header="IP地址"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserPhone}" Header="端口号"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="账号"/>
+                            <DataGridTextColumn Width="*" FontSize="30" Binding="{Binding antennagroupName}" Header="天线组名称"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding antennagroupIp}" Header="IP地址"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding antennagroupPort}" Header="端口号"/>
+                            <!--<DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="模块地址"/>-->
                             <DataGridTemplateColumn Width="*"  Header="操作">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Button Content="取用" Tag="{Binding 需要的参数}" />
+                                            <Button Content="编辑 " Style="{StaticResource ButtonStyle1}" Foreground="Gold" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click_3"/>
+                                            <Button Content=" 删除" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click_4"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -779,6 +731,7 @@
 
                 </StackPanel>
             </Border>
+
         </StackPanel>
     </ScrollViewer>
 </Page>

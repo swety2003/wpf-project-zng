@@ -115,5 +115,44 @@ namespace DefaultWidgets.Utils
             return responseBody;
         }
 
+
+
+        public async Task<string> PutJson(string url, string json)
+        {
+            string responseBody;
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            try
+            {
+                HttpResponseMessage response = await httpClient.PutAsync(new Uri(url), content);
+                response.EnsureSuccessStatusCode();
+                responseBody = await response.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+                return null;
+            }
+            return responseBody;
+        }
+
+
+        public async Task<string> Delete(string url)
+        {
+            string responseBody;
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync(url);
+                response.EnsureSuccessStatusCode();
+                responseBody = await response.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+                return null;
+            }
+            return responseBody;
+        }
+
+
+
     }
 }
