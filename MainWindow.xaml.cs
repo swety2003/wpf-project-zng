@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using WPF_Project.Common;
+using WPF_Project.Dialogs;
 using WPF_Project.Pages;
 using WpfWidgetDesktop.Utils;
 
@@ -62,7 +65,7 @@ namespace WPF_Project
 
                 if (!IsLogin)
                 {
-                    EnsuerLogin();
+                    EnsuerLoginAsync();
                     return;
                 }
             }
@@ -111,39 +114,67 @@ namespace WPF_Project
 
         private void loginLabel_Click(object sender, RoutedEventArgs e)
         {
-            EnsuerLogin();
+            EnsuerLoginAsync();
         }
         public bool AcquireLogin()
         {
             return true;
         }
-        public bool EnsuerLogin()
+        public async Task EnsuerLoginAsync()
         {
 
             if (!IsLogin)
             {
 
-                new ToolGetDialog1("系统提示","请刷卡或扫脸登录").ShowDialog();
+                //new ToolGetDialog1("系统提示","请刷卡或扫脸登录").ShowDialog();
 
-                IsLogin = AcquireLogin();
-                if (IsLogin)
+
+                var d = new UserLogin();
+                var dr = d.ShowDialog();
+                if (dr == true)
                 {
-                    LoginSuccess();
+                    var resp=await API.UserLogin.LoginAsync(d.Result[0],d.Result[1]);
+
+                    JObject jo = JObject.Parse(resp);
+
+                    try
+                    {
+
+                        int code = (int)jo["code"];
+
+                        if (code == 200)
+                        {
+                            StaticValues.MainWindow.IsLogin = true;
+
+                            StaticValues.MainWindow.LoginSuccess();
+
+                            var r = new CustomDialog("系统提示", "欢迎你，张三\n 是否快速取还？").ShowDialog();
+                            if (r == true)
+                            {
+                                StaticValues.MainWindow.NagivateTo(new ToolGet());
+
+                            }
+
+                        }
+                        else
+                        {
+                            new ToolGetDialog1("系统提示", "密码不正确！").ShowDialog();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("网络错误/服务端错误!");
+                    }
+
 
                 }
-                var r=new CustomDialog("系统提示" ,"欢迎你，张三\n 是否快速取还？").ShowDialog();
-                if (r==true)
-                {
-                    StaticValues.MainWindow.NagivateTo(new ToolGet());
 
-                }
 
             }
             else
             {
-                LoginSuccess();
+                //LoginSuccess();
             }
-            return IsLogin;
 
 
         }

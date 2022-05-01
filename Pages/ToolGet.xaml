@@ -50,6 +50,7 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Border BorderThickness="0 0 0 1" BorderBrush="#80FFFFFF">
@@ -74,37 +75,115 @@
                                 </Grid>
                             </Border>
 
-                            <DataGrid Grid.Row="1" Background="Transparent"  BorderThickness="0"> 
-                                <DataGrid.Resources>
-                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource datagridstyle}">
-                                        
+                            <Grid Width="1040" Grid.Row="1">
+                                <Grid.Resources>
+                                    <Style TargetType="Label" >
+                                        <Setter Property="FontSize" Value="30"/>
+                                        <Setter Property="Foreground" Value="White"/>
                                     </Style>
-                                </DataGrid.Resources>
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Width="0.5*" MinWidth="25"  Binding="{Binding UserID}" Header="+"/>
-                                    <DataGridTextColumn Width="*"  Binding="{Binding UserName}" Header="名称"/>
-                                    <DataGridTemplateColumn Width="200" Header="图片">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image Source="{Binding image}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn Width="*" Binding="{Binding UserPasswd}" Header="RFID"/>
-                                    <DataGridTextColumn Width="*" Binding="{Binding UserPhone}" Header="工具位置"/>
-                                    <DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="状态"/>
-                                    <DataGridTemplateColumn Width="*"  Header="操作">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    <Button Content="取用" Tag="{Binding 需要的参数}" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="选择"/>
 
+                                <Label Grid.Column="1" Content="工具名称"/>
+                                <Label Grid.Column="2" Content="工具图片"/>
+                                <Label Grid.Column="3" Content="rfid"/>
+                                <Label Grid.Column="4" Content="状态"/>
+                                <Label Grid.Column="5" Content="操作"/>
+                                
+
+
+
+                            </Grid>
+                            
+                            <ListView Grid.Row="2" Background="Transparent"  ItemsSource="{Binding ToolsByTool.rows}" >
+                                <ListView.Resources>
+                                    <Style TargetType="Label" >
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="BorderThickness" Value="1 0 1 0"/>
+                                        <Setter Property="BorderBrush" Value="#50FFFFFF"/>
+                                        <Setter Property="FontSize" Value="30"/>
+                                        <Setter Property="Margin" Value="10 0"/>
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.ItemTemplate>
+                                    <ItemContainerTemplate>
+                                        <Grid Width="1040">
+                                            <Grid.Resources>
+                                                <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+                                                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                                                    <Setter Property="OverridesDefaultStyle" Value="False" />
+                                                    <Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisual}" />
+                                                    <Setter Property="Height" Value="25"/>
+                                                    <Setter Property="IsChecked" Value="False"/>
+                                                    <Setter Property="Margin" Value="0,20"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="CheckBox">
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Height}">
+                                                                        <Rectangle x:Name="CheckBoxRectangle" Fill="White" Opacity="0.1" RadiusY="20" RadiusX="20" Margin="10"/>
+                                                                        <Rectangle x:Name="CheckBoxRectangleOut" Stroke="#FF06DAD1" StrokeThickness="0" RadiusY="15" RadiusX="15"/>
+                                                                        <Grid x:Name="CheckedMark" Width="50" Height="50" Visibility="Collapsed">
+                                                                            <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M1,19 L20,44" Stroke="White"/>
+                                                                            <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M20,44 L50,14" Stroke="White"/>
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </Grid>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter TargetName="CheckedMark" Property="Visibility" Value="Visible"></Setter>
+                                                                        <!--<Setter TargetName="CheckBoxRectangle" Property="Fill" Value="#FF00A8E0"></Setter>-->
+                                                                        <Setter TargetName="CheckBoxRectangle" Property="Opacity" Value="0.1"></Setter>
+                                                                        <!--<Setter TargetName="CheckBoxRectangleOut" Property="Stroke" Value="Transparent"></Setter>-->
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Style="{DynamicResource CheckBoxStyle}" Height="90" Width="90" IsChecked="{Binding selected}">
+                                                
+                                            </CheckBox>
+                                            
+                                            <Label Grid.Column="1" Content="{Binding toolName}"/>
+                                            <Image Grid.Column="2" Width="200" Source="https://i0.hdslb.com/bfs/archive/33881d1d76ab6fb603c49ae2e76c495c529a5bc3.jpg" />
+                                            <Label Grid.Column="3" Content="{Binding rfidCode}"/>
+                                            <Label Grid.Column="4" Content="{Binding status}"/>
+                                            <StackPanel Grid.Column="5" VerticalAlignment="Center">
+                                                <Button Style="{DynamicResource ButtonStyle1}" FontSize="30" BorderThickness="0"  Background="Transparent" Foreground="Gold" Content="取用"/>
+                                            </StackPanel>
+
+
+
+                                        </Grid>
+                                    </ItemContainerTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </Grid>
                     </Border>
 

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_Project.API;
 using WPF_Project.Common;
 using WPF_Project.Dialogs;
 using WpfWidgetDesktop.Utils;
@@ -89,10 +90,18 @@ namespace WPF_Project.Pages
                 JObject o = JObject.Parse(r);
 
                 int code = (int)o["code"];
+                string token = (string)o["token"];
 
                 if (code == 200)
                 {
+                    APICOMMON.SetToken(token);
+
+
+
                     StaticValues.MainWindow.IsLogin = true;
+
+                    StaticValues.MainWindow.LoginSuccess();
+
 
                     StaticValues.MainWindow.NagivateTo(new AdminView());
 

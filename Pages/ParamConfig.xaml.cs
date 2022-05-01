@@ -27,6 +27,10 @@ namespace WPF_Project.Pages
     public partial class ParamConfig : Page
     {
 
+        //选择的柜组id
+        private string cabinetgroupId;
+
+
         public ParamConfigVM vm = new ParamConfigVM();
         public ParamConfig()
         {
@@ -61,7 +65,7 @@ namespace WPF_Project.Pages
                 
             }
 
-            var r = await Switch.switchList("1", "1", "1");
+            var r = await Switch.switchList("1", "10", "1");
 
             vm.SwitchList = JsonConvert.DeserializeObject<Switch.switchListDataType.Root>(r);
 
@@ -69,7 +73,7 @@ namespace WPF_Project.Pages
 
             vm.CabinetGroupList = JsonConvert.DeserializeObject<CabinetGroup.GroupDataType.Root>(r);
 
-            r = await antennagroup.GroupList("1", "1", "1");
+            r = await antennagroup.GroupList("1", "10", "1");
 
             vm.AntennaGroup = JsonConvert.DeserializeObject<antennagroup.GroupDataType.Root>(r);
 
@@ -136,8 +140,18 @@ namespace WPF_Project.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            vm.SwitchList.rows.Remove(switchDG.SelectedValue as Switch.switchListDataType.RowsItem);
+            var id = (sender as Button).Tag.ToString(); ;
+            DoDelectSwitchAsync(id);
 
+        }
+
+        private async Task DoDelectSwitchAsync(string id)
+        {
+
+            await API.Switch.switchDel(id);
+
+            LoadDataAsync();
+            //vm.SwitchList.rows.Remove(switchDG.SelectedValue as Switch.switchListDataType.RowsItem);
         }
 
         //天线组操作
@@ -148,6 +162,13 @@ namespace WPF_Project.Pages
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var cb=sender as ComboBox;
+
 
         }
     }
@@ -175,7 +196,7 @@ namespace WPF_Project.Pages
         public antennagroup.GroupDataType.Root AntennaGroup
         {
             get { return _antennaGroup; }
-            set { _antennaGroup = value; }
+            set { _antennaGroup = value;DoNotify(); }
         }
 
 

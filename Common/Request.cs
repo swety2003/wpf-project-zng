@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +17,27 @@ namespace DefaultWidgets.Utils
             HttpClientHandler handler = new HttpClientHandler() { UseCookies = true };
             httpClient = new HttpClient(handler);
             httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36 Edg/99.0.1150.46");
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjE0ZDhiNjkwLWZjMDQtNDY5YS05ZTdkLWNmODQ5ZmM0Nzc0MyJ9.Dlu6Iw4gSj1EqnzKyRxB - a1Bp8zWGcxSEZ5RKcFlf5OmA8NiVzkJwvBA3jImwxTnLhY2Fyw - Cmosg6V7DU_DEw");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjE0ZDhiNjkwLWZjMDQtNDY5YS05ZTdkLWNmODQ5ZmM0Nzc0MyJ9.Dlu6Iw4gSj1EqnzKyRxB - a1Bp8zWGcxSEZ5RKcFlf5OmA8NiVzkJwvBA3jImwxTnLhY2Fyw - Cmosg6V7DU_DEw");
             //httpClient.DefaultRequestHeaders.Add("Cookie", User.Cookie);
 
             httpClient.Timeout = new TimeSpan(0, 0, 0, 300); //超时时间             
         }
 
+
+        public void RefreshToken(string token)
+        {
+
+            //httpClient.DefaultRequestHeaders.Remove("Authorization");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            AuthenticationHeaderValue authentication = new AuthenticationHeaderValue(
+                "Bearer",
+                token);
+
+
+            httpClient.DefaultRequestHeaders.Authorization = authentication;
+
+            Console.WriteLine(httpClient.DefaultRequestHeaders.ToString()); 
+        }
         /// <summary>
         /// 异步Get请求
         /// </summary>

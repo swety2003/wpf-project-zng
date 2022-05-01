@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WPF Project": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "authenticationMode": "None",
+      "remoteDebugMachine": ""
+    }
+  }
+}

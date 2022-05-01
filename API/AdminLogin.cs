@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_Project.Common;
 using WpfWidgetDesktop.Utils;
 
 namespace WPF_Project.API
@@ -21,13 +22,18 @@ namespace WPF_Project.API
     {
         private static string GUID = "core.admin";
 
-        public static string server { get; set; } = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3";
+        public static string server { get; set; } 
+            //= "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3";
 
         public static Request request { get; set; }
 
         public static void EnsuerInit()
         {
-            request = new Request();
+            if(request == null)
+            {
+                request = new Request();
+
+            }
             if (server == null)
             {
 
@@ -40,6 +46,12 @@ namespace WPF_Project.API
                     server = $"http://{apicfg.ip}:{apicfg.port}";
                 }
             }
+        }
+
+
+        public static void SetToken(string token)
+        {
+            request.RefreshToken(token);
         }
     }
 
@@ -56,11 +68,11 @@ namespace WPF_Project.API
             string path = "";
             var url = $"{APICOMMON.server}/dev-api/login";
             //Dictionary<string, string> data = new Dictionary<string, string>();
+            Dictionary<String, String> data = new Dictionary<String, String>();
 
-            List<KeyValuePair<String, String>> data=new List<KeyValuePair<String, String>>();
 
-            data.Add(new KeyValuePair<string, string>("username", id));
-            data.Add(new KeyValuePair<string, string>("password", pwd));
+            data.Add("username", id );
+            data.Add("password", pwd);
 
 
             var r =await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
@@ -71,7 +83,27 @@ namespace WPF_Project.API
 
     }
 
+    public static class UserLogin
+    {
+        public static async Task<string> LoginAsync(string id, string pwd)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/user/login";
+            //Dictionary<string, string> data = new Dictionary<string, string>();
 
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("username", id);
+            data.Add("password", pwd);
+
+
+            var r = await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
+
+            return r;
+
+        }
+    }
     public static class Switch
     {
         public class switchListDataType
@@ -193,13 +225,13 @@ namespace WPF_Project.API
 
             //var c=url == url1;
 
+            Dictionary<String, String> data = new Dictionary<String, String>();
 
-            List<KeyValuePair<String, String>> data = new List<KeyValuePair<String, String>>();
 
-            data.Add(new KeyValuePair<string, string>("switchName", switchName));
-            data.Add(new KeyValuePair<string, string>("switchIp", switchIp));
-            data.Add(new KeyValuePair<string, string>("cabinetgroupId", cabinetgroupId));
-            data.Add(new KeyValuePair<string, string>("switchPort", switchPort));
+            data.Add("switchName", switchName);
+            data.Add("switchIp", switchIp);
+            data.Add("cabinetgroupId", cabinetgroupId);
+            data.Add("switchPort", switchPort);
 
             //var r = await APICOMMON.request.Post(url, data);
             var r = await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
@@ -209,6 +241,28 @@ namespace WPF_Project.API
 
         }
 
+
+
+        public static async Task<string> switchDel(string id)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "/dev-api/login";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/toolswitch";
+
+            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3//dev-api/cupboard/toolswitch/list";
+
+
+            //var c=url == url1;
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+            url += "/" + id;
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.Delete(url);
+
+
+            return r;
+        }
     }
 
     public static class CabinetGroup
@@ -420,6 +474,154 @@ namespace WPF_Project.API
             return r;
 
         }
+    }
+
+    public static class ToolGet
+    {
+        public class DataType
+        {
+            public class @params
+            {
+            }
+
+            public class RowsItem:NotifyBase
+            {
+                //public bool selected { get;set; }
+
+                private bool _sel;
+
+                public bool selected
+                {
+                    get { return _sel; }
+                    set { _sel = value; DoNotify(); }
+                }
+
+
+
+
+                /// <summary>
+                /// 
+                /// </summary>
+                public string searchValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string remark { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public @params @params { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int toolId { get; set; }
+                /// <summary>
+                /// 工具名称11111
+                /// </summary>
+                public string toolName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int toolTypeId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int toolClassId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolNo { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int warehouseId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgroupId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int subcabinetId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgridId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string rfidCode { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string status { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string delFlag { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolIds { get; set; }
+            }
+
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public int total { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public ObservableCollection<RowsItem> rows { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int code { get; set; }
+                /// <summary>
+                /// 查询成功
+                /// </summary>
+                public string msg { get; set; }
+            }
+
+        }
+
+        public static async Task<string> ByTool(string pageNum, string pageSize, string cabinetgroupId)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "/dev-api/login";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/user/toollist";
+
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("pageNum", pageNum);
+            data.Add("cabinetgroupId", cabinetgroupId);
+            data.Add("pageSize", pageSize);
+            var r = await APICOMMON.request.Get(url, data);
+
+            return r;
+
+        }
+
     }
 
 }

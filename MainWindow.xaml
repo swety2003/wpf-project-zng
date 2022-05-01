@@ -16,65 +16,68 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Window.Resources>
-    <Border>
-        <Border.Background>
-            <ImageBrush ImageSource="Assets\DemoView\系统维护.png" Opacity="0.01"/>
-        </Border.Background>
+    <Viewbox>
+        <Border Width="1080" Height="1920">
+            <Border.Background>
+                <ImageBrush ImageSource="Assets\DemoView\系统维护.png" Opacity="0.01"/>
+            </Border.Background>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid x:Name="topBar" Height="120" Background="Transparent" Margin="0 50 0 0">
-                <Button HorizontalAlignment="Left" Background="Transparent" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Width="120" Click="Button_Click">
-                    <Image Source="Assets/enter@2x.png" Height="73" Margin="0,0,0,0"/>
-                </Button>
-                <TextBlock x:Name="titleTB" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="58"  Margin="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="topBar" Height="120" Background="Transparent" Margin="0 50 0 0">
+                    <Button HorizontalAlignment="Left" Background="Transparent" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Width="120" Click="Button_Click">
+                        <Image Source="Assets/enter@2x.png" Height="73" Margin="0,0,0,0"/>
+                    </Button>
+                    <TextBlock x:Name="titleTB" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="58"  Margin="0">
                     系统维护
-                </TextBlock>
-                <Button Visibility="Hidden" x:Name="scanBtn" Background="Transparent" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Width="120" Click="Button_Click">
-                    <Image Source="Assets/scan@2x.png" Height="100" Margin="0,0,0,0"/>
-                </Button>
-                <Line X1="0" X2="1080" Y1="0" Y2="0" StrokeThickness="1" Stroke="White" VerticalAlignment="Bottom" />
-            </Grid>
-            <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="rootFrame" Source="Pages/HomePageView.xaml"/>
-            <Grid x:Name="statueBar" Grid.Row="2" Height="150" Background="#30000000">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="systemTime" VerticalAlignment="Center" Margin="53,0"
-                           FontSize="42"
-                           Text="{Binding CTime}"/>
-                <Grid Grid.Column="1" >
+                    </TextBlock>
+                    <Button Visibility="Hidden" x:Name="scanBtn" Background="Transparent" HorizontalAlignment="Right" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Width="120" Click="Button_Click">
+                        <Image Source="Assets/scan@2x.png" Height="100" Margin="0,0,0,0"/>
+                    </Button>
+                    <Line X1="0" X2="1080" Y1="0" Y2="0" StrokeThickness="1" Stroke="White" VerticalAlignment="Bottom" />
+                </Grid>
+                <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="rootFrame" Source="Pages/HomePageView.xaml"/>
+                <Grid x:Name="statueBar" Grid.Row="2" Height="150" Background="#30000000">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button BorderThickness="0" x:Name="loginLabel" Style="{DynamicResource ButtonStyle1}" Background="Transparent"
+                    <TextBlock x:Name="systemTime" VerticalAlignment="Center" Margin="53,0"
+                           FontSize="42"
+                           Text="{Binding CTime}"/>
+                    <Grid Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button BorderThickness="0" x:Name="loginLabel" Style="{DynamicResource ButtonStyle1}" Background="Transparent"
                              Click="loginLabel_Click">
-                        <Label Foreground="#FFD56B" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">请登录</Label>
-                    </Button>
-                    <Button x:Name="LoginSuccessBtn" Visibility="Collapsed" Style="{DynamicResource ButtonStyle1}" Background="Transparent" BorderThickness="0"
+                            <Label Foreground="#FFD56B" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">请登录</Label>
+                        </Button>
+                        <Button x:Name="LoginSuccessBtn" Visibility="Collapsed" Style="{DynamicResource ButtonStyle1}" Background="Transparent" BorderThickness="0"
                             Click="LoginSuccessBtn_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="64" Source="https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng94f79f58956c9f7b4d56c026593af62da12c5fe0eba734dff2536e276bee3cf6"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="64" Source="https://lanhu.oss-cn-beijing.aliyuncs.com/SketchPng94f79f58956c9f7b4d56c026593af62da12c5fe0eba734dff2536e276bee3cf6"/>
 
-                            <TextBlock Text="首页" VerticalAlignment="Center" Foreground="#48FFFFFF"  FontSize="40"/>
+                                <TextBlock Text="首页" VerticalAlignment="Center" Foreground="#48FFFFFF"  FontSize="40"/>
 
-                        </StackPanel>
-                    </Button>
-                    <Button Grid.Column="1" Background="Transparent" Style="{DynamicResource ButtonStyle1}" BorderThickness="0" Click="Button_Click_1">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="64" Source="Assets/退出@2x.png"/>
-                            <TextBlock VerticalAlignment="Center" Foreground="#48FFFFFF" Text="退出" FontSize="40"/>
-                        </StackPanel>
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="1" Background="Transparent" Style="{DynamicResource ButtonStyle1}" BorderThickness="0" Click="Button_Click_1">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="64" Source="Assets/退出@2x.png"/>
+                                <TextBlock VerticalAlignment="Center" Foreground="#48FFFFFF" Text="退出" FontSize="40"/>
+                            </StackPanel>
 
-                    </Button>
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
-        </Grid>
-    </Border>
+        </Border>
+
+    </Viewbox>
 </Window>

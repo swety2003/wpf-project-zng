@@ -585,6 +585,8 @@
                               
                               DisplayMemberPath="cabinetgroupName"
                               
+                              SelectionChanged="ComboBox_SelectionChanged"
+                              
                               ItemsSource="{Binding CabinetGroupList.rows}" Style="{DynamicResource ComboBoxStyle1}" BorderThickness="0" Background="Transparent" Grid.Column="1" Width="500">
 
                     </ComboBox>
@@ -683,8 +685,8 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Button Content="编辑 " Style="{StaticResource ButtonStyle1}" Foreground="Gold" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click"/>
-                                            <Button Content=" 删除" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click_1"/>
+                                            <Button Content="编辑 " Style="{StaticResource ButtonStyle1}" Foreground="Gold" BorderThickness="0" Background="Transparent" Tag="{Binding switchId}" Click="Button_Click"/>
+                                            <Button Content=" 删除" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Background="Transparent" Tag="{Binding switchId}" Click="Button_Click_1"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -710,7 +712,7 @@
             <Border Background="#30FFFFFF" CornerRadius="10">
                 <StackPanel>
                     <DataGrid Grid.Row="1" x:Name="antennaDG" Background="Transparent" BorderThickness="0" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False"
-                              ItemsSource="{Binding AntennaGroup.rows,Mode=TwoWay}" CanUserSortColumns="False" SelectionMode="Single">
+                              ItemsSource="{Binding AntennaGroup.rows}" CanUserSortColumns="False" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" FontSize="30" Binding="{Binding antennagroupName}" Header="天线组名称"/>
                             <DataGridTextColumn Width="*" Binding="{Binding antennagroupIp}" Header="IP地址"/>
