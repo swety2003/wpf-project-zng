@@ -128,6 +128,23 @@ namespace WPF_Project.Pages
 
                 vm.AntennaGroup = JsonConvert.DeserializeObject<antennagroup.GroupDataType.Root>(r);
 
+                r=await ToolDoor.Get("1","10",cabinetgroupId);
+                var origin= JsonConvert.DeserializeObject<ToolDoor.DataType.Root>(r);
+
+                foreach (var item in origin.rows)
+                {
+                    if(item.cabinetgroupId.ToString() == cabinetgroupId)
+                    {
+                        IsDoorNull = false;
+                        vm.ToolDoor = item;
+                    }
+                }
+                if (IsDoorNull)
+                {
+                    vm.ToolDoor = new();
+                }
+                
+
 
             }
 
@@ -418,10 +435,79 @@ namespace WPF_Project.Pages
             cfg.IsKey = modeSelectRB.IsChecked==false;
             SettingProvider.Set(guid, cfg);
         }
+
+
+
+        private bool IsDoorNull = true;
+        //保存门禁信息
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+
+            SaveDoorAsync();
+
+        }
+        private async void SaveDoorAsync()
+        {
+            string resp="";
+            if (IsDoorNull)
+            {
+
+                resp=await ToolDoor.Add(doorName:vm.ToolDoor.doorName,
+                    doorIp:vm.ToolDoor.doorIp,doorPort:vm.ToolDoor.doorPort,
+                    account:vm.ToolDoor.account,password:vm.ToolDoor.password,cabinetgroupId:cabinetgroupId);
+
+
+            }
+            else
+            {
+                resp = await ToolDoor.Edit(doorName: vm.ToolDoor.doorName,
+                    doorIp: vm.ToolDoor.doorIp, doorPort: vm.ToolDoor.doorPort,
+                    account: vm.ToolDoor.account, password: vm.ToolDoor.password, cabinetgroupId: cabinetgroupId,
+                    doorId: vm.ToolDoor.doorId.ToString());
+
+
+
+            }
+            try
+            {
+
+                JObject o = JObject.Parse(resp);
+
+                int code = (int)o["code"];
+
+                if (code == 200)
+                {
+
+                    new ToolGetDialog1("系统提示", "编辑成功！").ShowDialog();
+
+                    LoadDataAsync(false);
+
+                }
+                else
+                {
+                    new ToolGetDialog1("系统提示", "编辑失败！").ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("网络错误/服务端错误!");
+            }
+        }
     }
 
     public class ParamConfigVM : NotifyBase
     {
+
+        private ToolDoor.DataType.RowsItem _toolDoor;
+
+        public ToolDoor.DataType.RowsItem ToolDoor
+        {
+            get { return _toolDoor; }
+            set { _toolDoor = value;DoNotify(); }
+        }
+
+
+
         private Switch.switchListDataType.Root _switchList;
 
         public Switch.switchListDataType.Root SwitchList

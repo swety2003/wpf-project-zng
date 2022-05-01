@@ -311,10 +311,10 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        
-        
+
+
         <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
-            
+
             <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -498,90 +498,90 @@
         </Style>
     </Page.Resources>
     <ScrollViewer  PanningMode="VerticalOnly" ManipulationBoundaryFeedback="ScrollViewer_ManipulationBoundaryFeedback">
-    <StackPanel Margin="50 10">
-        <StackPanel.Resources>
-            <Style TargetType="Label">
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="FontSize" Value="50" />
-            </Style>
-        </StackPanel.Resources>
-        <Label Margin="20">
-            通讯参数
-        </Label>
-        <Border Background="#30FFFFFF" CornerRadius="10">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label VerticalAlignment="Center" Margin="20 0">服务端IP</Label>
+        <StackPanel Margin="50 10">
+            <StackPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="FontSize" Value="50" />
+                </Style>
+            </StackPanel.Resources>
+            <Label Margin="20">
+                通讯参数
+            </Label>
+            <Border Background="#30FFFFFF" CornerRadius="10">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" Margin="20 0">服务端IP</Label>
                         <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
                          FontSize="40" Foreground="White" Padding="30" Text="{Binding SysIP}"
                          >
                         </TextBox>
-                </Grid>
-                
-                <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
+                    </Grid>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label VerticalAlignment="Center" Margin="20 0">端口号</Label>
+                    <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" Margin="20 0">端口号</Label>
                         <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
                          FontSize="40" Foreground="White" Padding="30" Text="{Binding SysPort}"
                          >
                         </TextBox>
-                </Grid>
-            </StackPanel>
-        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
 
-        <Label Margin="20">
-            系统类型
-        </Label>
-        <Border Background="#30FFFFFF" CornerRadius="10">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">类型选择</Label>
-                </Grid>
-                <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
+            <Label Margin="20">
+                系统类型
+            </Label>
+            <Border Background="#30FFFFFF" CornerRadius="10">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">类型选择</Label>
+                    </Grid>
+                    <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton x:Name="modeSelectRB" IsChecked="True" Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton x:Name="modeSelectRB" IsChecked="True" Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
                                      VerticalAlignment="Center" Margin="40 0 0 0" GroupName="sysType"/>
-                        <Label FontSize="40" Padding="30">工具柜管理系统</Label>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                            <Label FontSize="40" Padding="30">工具柜管理系统</Label>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
                                      VerticalAlignment="Center" Margin="40 0 0 0" GroupName="sysType"/>
-                        <Label FontSize="40" Padding="30">钥匙柜管理系统</Label>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-        </Border>
+                            <Label FontSize="40" Padding="30">钥匙柜管理系统</Label>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
 
-        <Label Margin="20">
-            本机柜组
-        </Label>
-        <Border Background="#30FFFFFF" CornerRadius="10">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">柜组选择</Label>
+            <Label Margin="20">
+                本机柜组
+            </Label>
+            <Border Background="#30FFFFFF" CornerRadius="10">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">柜组选择</Label>
                         <ComboBox x:Name="cabinetgroupIdCB" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"  FontSize="60" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right"
                               
                               DisplayMemberPath="cabinetgroupName"
@@ -590,75 +590,127 @@
                               
                               ItemsSource="{Binding CabinetGroupList.rows}" Style="{DynamicResource ComboBoxStyle1}" BorderThickness="0" Background="Transparent" Grid.Column="1" Width="500">
 
-                    </ComboBox>
-                
-                </Grid>
-                
-            </StackPanel>
-        </Border>
+                        </ComboBox>
 
-        <Label Margin="20" Content="钥匙系统模式"/>
-        <Border Background="#30FFFFFF" CornerRadius="10">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">模式选择</Label>
-                </Grid>
-                <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
-                                     VerticalAlignment="Center" Margin="40 0 0 0" GroupName="keyMode"/>
-                        <Label FontSize="40" Padding="30">随机模式</Label>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
-                                     VerticalAlignment="Center" Margin="40 0 0 0" GroupName="keyMode"/>
-                        <Label FontSize="40" Padding="30">固定模式</Label>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-        </Border>
-
-        <Label Margin="20">
-            门禁设备
-        </Label>
-        <Border Background="#30FFFFFF" CornerRadius="10">
-                <StackPanel>
-                    <DataGrid Grid.Row="1" Background="Transparent" BorderThickness="0" Margin="20">
-                        <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource datagridstyle}">
-
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*"  Binding="{Binding UserName}" Header="门禁名称"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserPasswd}" Header="IP地址"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserPhone}" Header="端口号"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="账号"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding UserEmail}" Header="密码"/>
-                            <DataGridTemplateColumn Width="*"  Header="操作">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Button Content="取用" Tag="{Binding 需要的参数}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    </Grid>
 
                 </StackPanel>
-        </Border>
+            </Border>
+
+            <Label Margin="20" Content="钥匙系统模式"/>
+            <Border Background="#30FFFFFF" CornerRadius="10">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">模式选择</Label>
+                    </Grid>
+                    <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                                     VerticalAlignment="Center" Margin="40 0 0 0" GroupName="keyMode"/>
+                            <Label FontSize="40" Padding="30">随机模式</Label>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                                     VerticalAlignment="Center" Margin="40 0 0 0" GroupName="keyMode"/>
+                            <Label FontSize="40" Padding="30">固定模式</Label>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="20">
+                    门禁设备
+                </Label>
+                <Button Grid.Column="1" Style="{DynamicResource ButtonStyle1}" Click="Button_Click_6" Background="#30FFFFFF" Margin="20 0" Height="70"  BorderThickness="1" BorderBrush="White"
+                   >
+                    <TextBlock Text="   保存   " Foreground="White" FontSize="40"/>
+                </Button>
+            </Grid>
+            <Border Background="#30FFFFFF" CornerRadius="10">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="Margin" Value="30 10"/>
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                            <Setter Property="MinWidth" Value="500"/>
+                            <Setter Property="Margin" Value="30 0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid MinHeight="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label>名称:</Label>
+                        <TextBox Grid.Column="1" FontSize="30" Text="{Binding ToolDoor.doorName}"></TextBox>
+                    </Grid>
+                    <Grid MinHeight="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label>ip地址:</Label>
+                        <TextBox Grid.Column="1" FontSize="30" Text="{Binding ToolDoor.doorIp}"></TextBox>
+                    </Grid>
+                    <Grid MinHeight="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label>端口号:</Label>
+                        <TextBox Grid.Column="1" FontSize="30" Text="{Binding ToolDoor.doorPort}"></TextBox>
+                    </Grid>
+                    <Grid MinHeight="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label>账号:</Label>
+                        <TextBox Grid.Column="1" FontSize="30" Text="{Binding ToolDoor.account}"></TextBox>
+                    </Grid>
+                    <Grid MinHeight="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label>密码</Label>
+                        <TextBox Grid.Column="1" FontSize="30" Text="{Binding ToolDoor.password}"></TextBox>
+                    </Grid>
+
+
+                </StackPanel>
+            </Border>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -676,7 +728,7 @@
                 <StackPanel>
                     <DataGrid Grid.Row="1" x:Name="switchDG" Background="Transparent" BorderThickness="0" Margin="20" AutoGenerateColumns="False" CanUserAddRows="False"
                               ItemsSource="{Binding SwitchList.rows,Mode=TwoWay}" CanUserSortColumns="False" SelectionMode="Single">
-                        
+
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" FontSize="30" Binding="{Binding switchName}" Header="开关量名称"/>
                             <DataGridTextColumn Width="*" Binding="{Binding switchIp}" Header="IP地址"/>

@@ -567,7 +567,177 @@ namespace WPF_Project.API
 
     }
 
+    public  static class ToolDoor
+    {
 
+
+        public class DataType
+        {
+            public class @params
+            {
+            }
+
+            public class RowsItem
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public string searchValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string remark { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public @params @params { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int doorId { get; set; }
+                /// <summary>
+                /// 门禁名称
+                /// </summary>
+                public string doorName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string doorIp { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string doorPort { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string account { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string password { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgroupId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string delFlag { get; set; }
+            }
+
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public int total { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<RowsItem> rows { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int code { get; set; }
+                /// <summary>
+                /// 查询成功
+                /// </summary>
+                public string msg { get; set; }
+            }
+
+        }
+
+
+        public static async Task<string> Get(string pageNum, string pageSize, string cabinetgroupId)
+        {
+            string path = "dev-api/cupboard/tooldoor/list";
+            APICOMMON.EnsuerInit();
+            var url = $"{APICOMMON.server}/{path}";
+
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("pageNum", pageNum);
+            data.Add("cabinetgroupId", cabinetgroupId);
+            data.Add("pageSize", pageSize);
+            var r = await APICOMMON.request.Get(url, data);
+
+            return r;
+        }
+
+
+        public static async Task<string> Edit(string doorName, string doorIp,
+            string doorPort, string cabinetgroupId, string doorId,
+            string account,string password
+            )
+        {
+            APICOMMON.EnsuerInit();
+            string path = "dev-api/cupboard/tooldoor";
+            var url = $"{APICOMMON.server}/{path}";
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("doorId", doorId);
+            data.Add("doorName", doorName);
+            data.Add("doorIp", doorIp);
+            data.Add("doorPort", doorPort);
+            data.Add("account", account);
+            data.Add("password", password);
+            data.Add("cabinetgroupId", cabinetgroupId);
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.PutJson(url, JsonConvert.SerializeObject(data));
+
+
+            return r;
+
+        }
+
+        public static async Task<string> Add(string doorName, string doorIp,
+            string doorPort, string cabinetgroupId,
+            string account, string password
+            )
+        {
+            APICOMMON.EnsuerInit();
+            string path = "dev-api/cupboard/tooldoor";
+            var url = $"{APICOMMON.server}/{path}";
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("doorName", doorName);
+            data.Add("doorIp", doorIp);
+            data.Add("doorPort", doorPort);
+            data.Add("account", account);
+            data.Add("password", password);
+            data.Add("cabinetgroupId", cabinetgroupId);
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
+
+
+            return r;
+
+        }
+
+
+    }
 
 
     public static class ToolGet
