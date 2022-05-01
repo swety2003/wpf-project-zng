@@ -8,6 +8,7 @@
       d:DesignHeight="14500" d:DesignWidth="1000"
       Title="ParamConfig"
       Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
       
       
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
@@ -557,7 +558,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                        <RadioButton x:Name="modeSelectRB" IsChecked="True" Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
                                      VerticalAlignment="Center" Margin="40 0 0 0" GroupName="sysType"/>
                         <Label FontSize="40" Padding="30">工具柜管理系统</Label>
                     </StackPanel>
@@ -581,10 +582,10 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">柜组选择</Label>
-                    <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"  FontSize="60" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right"
+                        <ComboBox x:Name="cabinetgroupIdCB" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle1}"  FontSize="60" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right"
                               
                               DisplayMemberPath="cabinetgroupName"
-                              
+                              SelectedValuePath="cabinetgroupId"
                               SelectionChanged="ComboBox_SelectionChanged"
                               
                               ItemsSource="{Binding CabinetGroupList.rows}" Style="{DynamicResource ComboBoxStyle1}" BorderThickness="0" Background="Transparent" Grid.Column="1" Width="500">
@@ -704,7 +705,7 @@
                 <Label Margin="20">
                     RFID 天线
                 </Label>
-                <Button Grid.Column="1" Style="{DynamicResource ButtonStyle1}" Background="#30FFFFFF" Margin="20 0" Height="70"  BorderThickness="1" BorderBrush="White"
+                <Button Grid.Column="1" Style="{DynamicResource ButtonStyle1}" Background="#30FFFFFF" Margin="20 0" Height="70"  BorderThickness="1" BorderBrush="White" Click="Button_Click_5"
                    >
                     <TextBlock Text="   添加   " Foreground="White" FontSize="40" />
                 </Button>
@@ -722,8 +723,8 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Button Content="编辑 " Style="{StaticResource ButtonStyle1}" Foreground="Gold" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click_3"/>
-                                            <Button Content=" 删除" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Background="Transparent" Tag="{Binding 需要的参数}" Click="Button_Click_4"/>
+                                            <Button Content="编辑 " Style="{StaticResource ButtonStyle1}" Foreground="Gold" BorderThickness="0" Background="Transparent" Tag="{Binding antennagroupId}" Click="Button_Click_3" />
+                                            <Button Content=" 删除" Style="{StaticResource ButtonStyle1}" BorderThickness="0" Background="Transparent" Tag="{Binding antennagroupId}" Click="Button_Click_4"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

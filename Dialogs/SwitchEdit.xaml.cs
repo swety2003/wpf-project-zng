@@ -21,7 +21,8 @@ namespace WPF_Project.Dialogs
     public partial class SwitchEdit : Window
     {
         public SwitchEditVm vm = new();
-        public SwitchEdit(string[] r=null)
+
+        public SwitchEdit(string[] r=null,string title="开关量编辑")
         {
             InitializeComponent();
             this.DataContext = vm;
@@ -33,6 +34,8 @@ namespace WPF_Project.Dialogs
                 vm.PORT= r[2];
                 vm.ID= r[3];
             }
+            titleTB.Text = title;
+
         }
 
         public string[] Result
@@ -69,7 +72,7 @@ namespace WPF_Project.Dialogs
         public string ID 
         {
             get { return _id; }
-            set { _id = value; }
+            set { _id = value; DoNotify(); }
         }
 
 

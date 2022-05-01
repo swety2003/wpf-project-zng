@@ -241,7 +241,27 @@ namespace WPF_Project.API
 
         }
 
+        public static async Task<string> Edit(string switchName, string switchIp, string switchPort, string cabinetgroupId, string switchId)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "/dev-api/login";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/toolswitch";
 
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("switchId", switchId);
+            data.Add("switchName", switchName);
+            data.Add("switchIp", switchIp);
+            data.Add("switchPort", switchPort);
+            data.Add("cabinetgroupId", cabinetgroupId);
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.PutJson(url, JsonConvert.SerializeObject(data));
+
+
+            return r;
+
+        }
 
         public static async Task<string> switchDel(string id)
         {
@@ -265,6 +285,8 @@ namespace WPF_Project.API
         }
     }
 
+
+    //柜组
     public static class CabinetGroup
     {
 
@@ -354,8 +376,6 @@ namespace WPF_Project.API
             string path = "/dev-api/login";
             var url = $"{APICOMMON.server}/dev-api/cupboard/toolcabinetgroup/list";
 
-
-
             Dictionary<String, String> data = new Dictionary<String, String>();
 
             data.Add("pageNum", pageNum);
@@ -368,8 +388,13 @@ namespace WPF_Project.API
 
 
 
+
+
     }
 
+
+
+    //天线
     public static class antennagroup
     {
         public class GroupDataType
@@ -474,7 +499,76 @@ namespace WPF_Project.API
             return r;
 
         }
+
+
+        public static async Task<string> Add(string antennagroupName, string antennagroupIp, string antennagroupPort, string cabinetgroupId)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "/dev-api/login";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup";
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+
+            data.Add("antennagroupName", antennagroupName);
+            data.Add("antennagroupIp", antennagroupIp);
+            data.Add("antennagroupPort", antennagroupPort);
+            data.Add("cabinetgroupId", cabinetgroupId);
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
+
+
+            return r;
+
+        }
+
+
+        public static async Task<string> Del(string id)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "/dev-api/login";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup";
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+            url += "/" + id;
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.Delete(url);
+
+
+            return r;
+        }
+
+        public static async Task<string> Edit(string antennagroupName, string antennagroupIp, string antennagroupPort, string cabinetgroupId,string antennagroupId)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "/dev-api/login";
+            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup";
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("antennagroupId", antennagroupId);
+            data.Add("antennagroupName", antennagroupName);
+            data.Add("antennagroupIp", antennagroupIp);
+            data.Add("antennagroupPort", antennagroupPort);
+            data.Add("cabinetgroupId", cabinetgroupId);
+
+            //var r = await APICOMMON.request.Post(url, data);
+            var r = await APICOMMON.request.PutJson(url, JsonConvert.SerializeObject(data));
+
+
+            return r;
+
+        }
+
+
+
     }
+
+
+
 
     public static class ToolGet
     {

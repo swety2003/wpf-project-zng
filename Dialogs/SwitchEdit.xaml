@@ -16,7 +16,7 @@
                 <RowDefinition Height="140"/>
             </Grid.RowDefinitions>
             <Border Background="#2FFFFFFF" CornerRadius="10 10 0 0">
-                <TextBlock Foreground="White" FontSize="40" Text="编辑" VerticalAlignment="Center" Margin="20"/>
+                <TextBlock Foreground="White" FontSize="40" x:Name="titleTB" VerticalAlignment="Center" Margin="20"/>
             </Border>
             <StackPanel Grid.Row="1" Background="#68FFFFFF">
                 <StackPanel.Resources>
@@ -30,7 +30,7 @@
                     </Style>
                 </StackPanel.Resources>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <Label Content="开关量名称:"  VerticalAlignment="Center"/>
+                    <Label Content="名称:"  VerticalAlignment="Center"/>
                     <TextBox  FontSize="50" Foreground="White" Background="Transparent" Text="{Binding Name}" Width="500"></TextBox>
 
                 </StackPanel>
