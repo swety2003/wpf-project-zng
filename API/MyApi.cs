@@ -27,6 +27,12 @@ namespace WPF_Project.API
 
         public static Request request { get; set; }
 
+
+        public static void ClearToken()
+        {
+            request.ClearToken();
+        }
+
         public static void EnsuerInit()
         {
             if(request == null)
@@ -65,6 +71,7 @@ namespace WPF_Project.API
         public static async Task<string> LoginAsync(string id,string pwd)
         {
             APICOMMON.EnsuerInit();
+            APICOMMON.ClearToken();
             string path = "";
             var url = $"{APICOMMON.server}/dev-api/login";
             //Dictionary<string, string> data = new Dictionary<string, string>();
@@ -87,7 +94,10 @@ namespace WPF_Project.API
     {
         public static async Task<string> LoginAsync(string id, string pwd)
         {
+
             APICOMMON.EnsuerInit();
+            APICOMMON.ClearToken();
+
             string path = "";
             var url = $"{APICOMMON.server}/dev-api/cupboard/user/login";
             //Dictionary<string, string> data = new Dictionary<string, string>();

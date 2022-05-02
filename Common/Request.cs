@@ -23,6 +23,11 @@ namespace DefaultWidgets.Utils
             httpClient.Timeout = new TimeSpan(0, 0, 0, 300); //超时时间             
         }
 
+        public void ClearToken()
+        {
+            httpClient.DefaultRequestHeaders.Remove("Authorization");
+        }
+
 
         public void RefreshToken(string token)
         {
