@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -177,17 +178,64 @@ namespace WPF_Project.Pages
 
             if (vm.TotalCab>=1)
             {
+                if (vm.CurrentCab == 0)
+                {
+                    vm.CurrentCab = 1;
 
-                vm.CurrentCab = 1;
+                }
 
-                vm.SelectedSubCab = vm.SubCabList.rows[vm.CurrentCab];
+                var SelectedSubCab = vm.SubCabList.rows[vm.CurrentCab-1];
 
-                vm.CabName = vm.SelectedSubCab.subcabinetName;
+                vm.CabName = SelectedSubCab.subcabinetName;
+
+                LoadCabGridAsync(SelectedSubCab.subcabinetId.ToString());
             }
             else
             {
                 vm.CabName = "没有柜组";
             }
+        }
+
+        private async Task LoadCabGridAsync(string subcabinetId)
+        {
+            var r = await API.ToolGet.ToolcabinetGrid("1", "10", subcabinetId);
+
+            vm.CabGridList = JsonConvert.DeserializeObject<API.ToolGet.cabinetgridDT.Root>(r);
+        }
+
+
+
+        private void CabListItem_BTNClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("clicked");
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (vm.CurrentCab>1)
+            {
+                vm.CurrentCab -= 1;
+                LoadCabAsync();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (vm.CurrentCab < vm.TotalCab)
+            {
+                vm.CurrentCab += 1;
+                LoadCabAsync();
+
+            }
+            else
+            {
+
+            }
+
         }
     }
 
@@ -239,13 +287,6 @@ namespace WPF_Project.Pages
             set { _subCabList = value; DoNotify(); }
         }
 
-        private API.ToolGet.subcabinetDT.RowsItem _selectedSubCab;
-
-        public API.ToolGet.subcabinetDT.RowsItem SelectedSubCab
-        {
-            get { return _selectedSubCab; }
-            set { _selectedSubCab = value; DoNotify(); }
-        }
 
 
         private API.ToolGet.cabinetgridDT.Root _cabGrid;

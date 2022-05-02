@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPF_Project.Pages"
+      xmlns:local="clr-namespace:WPF_Project.Pages" xmlns:wpf_project="clr-namespace:WPF_Project"
       mc:Ignorable="d" 
       d:DesignHeight="1600" d:DesignWidth="1080"
       Loaded="Page_Loaded"
@@ -142,8 +142,8 @@
                                                                         <Rectangle x:Name="CheckBoxRectangle" Fill="White" Opacity="0.1" RadiusY="20" RadiusX="20" Margin="10"/>
                                                                         <Rectangle x:Name="CheckBoxRectangleOut" Stroke="#FF06DAD1" StrokeThickness="0" RadiusY="15" RadiusX="15"/>
                                                                         <Grid x:Name="CheckedMark" Width="50" Height="50" Visibility="Collapsed">
-                                                                            <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M1,19 L20,44" Stroke="White"/>
-                                                                            <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M20,44 L50,14" Stroke="White"/>
+                                                                            <Path SnapsToDevicePixels="False" StrokeThickness="6" Data="M1,19 L20,44" Stroke="White"/>
+                                                                            <Path SnapsToDevicePixels="False" StrokeThickness="5" Data="M20,44 L50,14" Stroke="White"/>
                                                                         </Grid>
                                                                     </Grid>
                                                                 </Grid>
@@ -208,30 +208,44 @@
                         <RowDefinition/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <Grid>
+                    <Grid Margin="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-                        <Button Background="Transparent" BorderThickness="0">
+                        <Button Background="Transparent" BorderThickness="0" Click="Button_Click_1">
                             <TextBlock Text="&#xE76B;" FontFamily="Segoe MDL2 Assets" Foreground="White"/>
                         </Button>
                         <Label Grid.Column="1" Foreground="White" HorizontalAlignment="Center" Content="{Binding CabName}">
                         </Label>
-                        <Button Grid.Column="2" Background="Transparent" BorderThickness="0">
+                        <Button Grid.Column="2" Background="Transparent" BorderThickness="0" Click="Button_Click_2">
                             <TextBlock Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" Foreground="White"/>
 
                         </Button>
                     </Grid>
-                    <Border Grid.Row="1"  CornerRadius="10" Background="#30FFFFFF" Margin="30 10">
+                    <Border Grid.Row="1"  CornerRadius="10" Background="#30FFFFFF" Margin="30 10" Padding="30">
                         <Grid>
+                            <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="Transparent" BorderThickness="0"
+                                      ItemsSource="{Binding CabGridList.rows}">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <wpf_project:CabListItem Width="900" HorizontalAlignment="Center" LabelText="{Binding cabinetgridName}" BTNClick="CabListItem_BTNClick" Tag="{Binding cabinetgridName}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                             <WrapPanel>
-                                
-                                
-                                
-                                
-                                
+
+
+
+
                             </WrapPanel>
 
 
