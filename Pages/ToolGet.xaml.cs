@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_Project.Common;
 using WPF_Project.Utils;
+using WpfWidgetDesktop.Utils;
 
 namespace WPF_Project.Pages
 {
@@ -31,6 +33,8 @@ namespace WPF_Project.Pages
             InitializeComponent();
 
         }
+
+        public string cabinetgroupId;
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -117,22 +121,107 @@ namespace WPF_Project.Pages
 
             this.DataContext = vm;
 
-            LoadDataAsync();
+            var r=SettingProvider.Get("core.paramcfg");
+
+            JObject o=JObject.Parse(r);
+
+            cabinetgroupId =(string) o["cabinetgroupId"];
+
+            if (cabinetgroupId!=null)
+            {
+                LoadDataAsync();
+
+            }
+            else
+            {
+                MessageBox.Show("未设置本机柜组id");
+            }
+
+
+
+
+
 
         }
 
         private async Task LoadDataAsync()
         {
-            var r = await API.ToolGet.ByTool("1", "10", "7");
+            var r = await API.ToolGet.ByTool("1", "10", cabinetgroupId);
 
             vm.ToolsByTool = JsonConvert.DeserializeObject<API.ToolGet.ByToolDataType.Root>(r);
 
 
         }
+
+
+        private void TabItem_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            if (cabinetgroupId != null)
+            {
+                LoadCabAsync();
+            }
+
+
+
+
+        }
+
+        private async void LoadCabAsync()
+        {
+            var r = await API.ToolGet.Toolsubcabinet("1", "10", cabinetgroupId);
+
+            vm.SubCabList = JsonConvert.DeserializeObject<API.ToolGet.subcabinetDT.Root>(r);
+
+            vm.TotalCab=vm.SubCabList.total;
+
+            if (vm.TotalCab>=1)
+            {
+
+                vm.CurrentCab = 1;
+
+                vm.SelectedSubCab = vm.SubCabList.rows[vm.CurrentCab];
+
+                vm.CabName = vm.SelectedSubCab.subcabinetName;
+            }
+            else
+            {
+                vm.CabName = "没有柜组";
+            }
+        }
     }
 
     public class TooGetVM : NotifyBase
     {
+        private int _currentcab;
+
+        public int CurrentCab
+        {
+            get { return _currentcab; }
+            set { _currentcab = value;DoNotify(); }
+        }
+        private int _totalCab;
+
+        public int TotalCab
+        {
+            get { return _totalCab; }
+            set { _totalCab = value; DoNotify(); }
+        }
+
+        private string _cabName;
+
+        public string CabName
+        {
+            get { return _cabName; }
+            set { _cabName = value; DoNotify(); }
+        }
+
+
+
+
+
+
+
         private API.ToolGet.ByToolDataType.Root _toolsByTool;
 
         public API.ToolGet.ByToolDataType.Root ToolsByTool
@@ -140,5 +229,33 @@ namespace WPF_Project.Pages
             get { return _toolsByTool; }
             set { _toolsByTool = value; DoNotify(); }
         }
+
+
+        private API.ToolGet.subcabinetDT.Root _subCabList;
+
+        public API.ToolGet.subcabinetDT.Root SubCabList
+        {
+            get { return _subCabList; }
+            set { _subCabList = value; DoNotify(); }
+        }
+
+        private API.ToolGet.subcabinetDT.RowsItem _selectedSubCab;
+
+        public API.ToolGet.subcabinetDT.RowsItem SelectedSubCab
+        {
+            get { return _selectedSubCab; }
+            set { _selectedSubCab = value; DoNotify(); }
+        }
+
+
+        private API.ToolGet.cabinetgridDT.Root _cabGrid;
+
+        public API.ToolGet.cabinetgridDT.Root CabGridList
+        {
+            get { return _cabGrid; }
+            set { _cabGrid = value; DoNotify(); }
+        }
+
+
     }
 }

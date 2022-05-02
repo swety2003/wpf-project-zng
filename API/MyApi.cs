@@ -889,7 +889,93 @@ namespace WPF_Project.API
 
         }
 
+        public class subcabinetDT
+        {
+            public class @params
+            {
+            }
 
+            public class RowsItem
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public string searchValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string remark { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public @params @params { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int subcabinetId { get; set; }
+                /// <summary>
+                /// 1#柜
+                /// </summary>
+                public string subcabinetName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string subcabinetNo { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string subcabinetType { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int warehouseId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgroupId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string delFlag { get; set; }
+            }
+
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public int total { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<RowsItem> rows { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int code { get; set; }
+                /// <summary>
+                /// 查询成功
+                /// </summary>
+                public string msg { get; set; }
+            }
+
+        }
 
         public static async Task<string> Toolsubcabinet(string pageNum, string pageSize, string cabinetgroupId)
         {
@@ -908,6 +994,133 @@ namespace WPF_Project.API
             return r;
 
         }
+
+        public class cabinetgridDT
+        {
+            public class @params
+            {
+            }
+
+            public class RowsItem
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public string searchValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string remark { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public @params @params { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgridId { get; set; }
+                /// <summary>
+                /// 工具柜格
+                /// </summary>
+                public string cabinetgridName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string cabinetgridNo { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int warehouseId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgroupId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int subcabinetId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string antennaGroup { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string antennaNum { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string switchingValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string inputPoint { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string outputPoint { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string delFlag { get; set; }
+            }
+
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public int total { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<RowsItem> rows { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int code { get; set; }
+                /// <summary>
+                /// 查询成功
+                /// </summary>
+                public string msg { get; set; }
+            }
+
+        }
+
+        public static async Task<string> ToolcabinetGrid(string pageNum, string pageSize, string subcabinetId)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "dev-api/cupboard/toolcabinetgrid/list";
+            var url = $"{APICOMMON.server}/{path}";
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("pageNum", pageNum);
+            data.Add("subcabinetId", subcabinetId);
+            data.Add("pageSize", pageSize);
+            var r = await APICOMMON.request.Get(url, data);
+
+            return r;
+
+        }
+
 
 
 
