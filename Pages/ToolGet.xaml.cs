@@ -125,7 +125,7 @@ namespace WPF_Project.Pages
         {
             var r = await API.ToolGet.ByTool("1", "10", "7");
 
-            vm.ToolsByTool = JsonConvert.DeserializeObject<API.ToolGet.DataType.Root>(r);
+            vm.ToolsByTool = JsonConvert.DeserializeObject<API.ToolGet.ByToolDataType.Root>(r);
 
 
         }
@@ -133,9 +133,9 @@ namespace WPF_Project.Pages
 
     public class TooGetVM : NotifyBase
     {
-        private API.ToolGet.DataType.Root _toolsByTool;
+        private API.ToolGet.ByToolDataType.Root _toolsByTool;
 
-        public API.ToolGet.DataType.Root ToolsByTool
+        public API.ToolGet.ByToolDataType.Root ToolsByTool
         {
             get { return _toolsByTool; }
             set { _toolsByTool = value; DoNotify(); }

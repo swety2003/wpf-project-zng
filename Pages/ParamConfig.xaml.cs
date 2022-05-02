@@ -131,6 +131,8 @@ namespace WPF_Project.Pages
                 r=await ToolDoor.Get("1","10",cabinetgroupId);
                 var origin= JsonConvert.DeserializeObject<ToolDoor.DataType.Root>(r);
 
+
+                vm.ToolDoor = new ToolDoor.DataType.RowsItem();
                 foreach (var item in origin.rows)
                 {
                     if(item.cabinetgroupId.ToString() == cabinetgroupId)

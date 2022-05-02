@@ -142,11 +142,18 @@ namespace WPF_Project
 
                         int code = (int)jo["code"];
 
+                        string token=(string)jo["token"];
+
+
+
                         if (code == 200)
                         {
                             StaticValues.MainWindow.IsLogin = true;
 
                             StaticValues.MainWindow.LoginSuccess();
+
+                            API.APICOMMON.SetToken(token);
+
 
                             var r = new CustomDialog("系统提示", "欢迎你，张三\n 是否快速取还？").ShowDialog();
                             if (r == true)

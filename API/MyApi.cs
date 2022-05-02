@@ -104,6 +104,7 @@ namespace WPF_Project.API
 
         }
     }
+
     public static class Switch
     {
         public class switchListDataType
@@ -567,6 +568,8 @@ namespace WPF_Project.API
 
     }
 
+
+    //
     public  static class ToolDoor
     {
 
@@ -742,7 +745,7 @@ namespace WPF_Project.API
 
     public static class ToolGet
     {
-        public class DataType
+        public class ByToolDataType
         {
             public class @params
             {
@@ -885,6 +888,28 @@ namespace WPF_Project.API
             return r;
 
         }
+
+
+
+        public static async Task<string> Toolsubcabinet(string pageNum, string pageSize, string cabinetgroupId)
+        {
+            APICOMMON.EnsuerInit();
+            string path = "dev-api/cupboard/toolsubcabinet/list";
+            var url = $"{APICOMMON.server}/{path}";
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("pageNum", pageNum);
+            data.Add("cabinetgroupId", cabinetgroupId);
+            data.Add("pageSize", pageSize);
+            var r = await APICOMMON.request.Get(url, data);
+
+            return r;
+
+        }
+
+
 
     }
 
