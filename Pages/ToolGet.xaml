@@ -230,7 +230,7 @@
                                       ItemsSource="{Binding CabGridList.rows}">
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel/>
+                                        <WrapPanel MaxWidth="1000"/>
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
 

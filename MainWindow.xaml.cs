@@ -106,9 +106,25 @@ namespace WPF_Project
 
             }
         }
+        public void ClearHistory()
+        {
+            if (!rootFrame.CanGoBack && !rootFrame.CanGoForward)
+            {
+                return;
+            }
 
+            var entry = rootFrame.RemoveBackEntry();
+            while (entry != null)
+            {
+                entry = rootFrame.RemoveBackEntry();
+            }
+
+            rootFrame.Navigate(new PageFunction<string>() { RemoveFromJournal = true });
+        }
         private void LoginSuccessBtn_Click(object sender, RoutedEventArgs e)
         {
+            ClearHistory();
+
             StaticValues.MainWindow.NagivateTo(new HomePageView());
         }
 
@@ -183,6 +199,11 @@ namespace WPF_Project
                 //LoginSuccess();
             }
 
+
+        }
+
+        private void LoginSuccessBtn_Click_1(object sender, RoutedEventArgs e)
+        {
 
         }
     }

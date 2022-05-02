@@ -24,7 +24,6 @@ namespace WPF_Project.Pages
         public HomePageView()
         {
             InitializeComponent();
-            StaticValues.Toparea.Visibility = Visibility.Collapsed;
         }
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
@@ -45,6 +44,7 @@ namespace WPF_Project.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            StaticValues.Toparea.Visibility = Visibility.Collapsed;
 
 
         }
