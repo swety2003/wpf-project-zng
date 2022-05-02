@@ -265,7 +265,7 @@ namespace WPF_Project.Pages
         {
 
 
-            var d = new SwitchEdit();
+            var d = new SwitchEdit(new string[] {"","", "" ,cabinetgroupId});
             var r = d.ShowDialog();
             if (r == true)
             {
@@ -392,7 +392,7 @@ namespace WPF_Project.Pages
         //天线组 add
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            var d = new SwitchEdit(title: "天线组编辑");
+            var d = new SwitchEdit(title: "天线组编辑",r:new string[] {  "", "", "",cabinetgroupId });
             var r = d.ShowDialog();
             if (r == true)
             {

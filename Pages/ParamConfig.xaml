@@ -516,7 +516,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label VerticalAlignment="Center" Margin="20 0">服务端IP</Label>
-                        <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
+                        <TextBox BorderThickness="0" IsReadOnly="True" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
                          FontSize="40" Foreground="White" Padding="30" Text="{Binding SysIP}"
                          >
                         </TextBox>
@@ -530,7 +530,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Label VerticalAlignment="Center" Margin="20 0">端口号</Label>
-                        <TextBox BorderThickness="0" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
+                        <TextBox BorderThickness="0" IsReadOnly="True" Background="Transparent" TextAlignment="Right" Grid.Column="1" Width="500"
                          FontSize="40" Foreground="White" Padding="30" Text="{Binding SysPort}"
                          >
                         </TextBox>
@@ -563,7 +563,7 @@
                             <Label FontSize="40" Padding="30">工具柜管理系统</Label>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                            <RadioButton IsEnabled="False" Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
                                      VerticalAlignment="Center" Margin="40 0 0 0" GroupName="sysType"/>
                             <Label FontSize="40" Padding="30">钥匙柜管理系统</Label>
                         </StackPanel>
@@ -605,7 +605,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">模式选择</Label>
+                        <Label VerticalAlignment="Center" Margin="20 0" Padding="0 30">模式选择（无功能）</Label>
                     </Grid>
                     <Line X1="0" X2="950" HorizontalAlignment="Center" Y1="0" Y2="0" StrokeThickness="1" Stroke="#50FFFFFF" VerticalAlignment="Bottom" />
 
