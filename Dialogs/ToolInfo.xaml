@@ -28,7 +28,7 @@
                 </StackPanel.Resources>
                 <Border Margin="40" Width="300" CornerRadius="10" Height="150" BorderThickness="2" BorderBrush="White">
                     <Border.Background>
-                        <ImageBrush />
+                        <ImageBrush ImageSource="{Binding item.image,Converter={StaticResource ImageUrlConverter}}"/>
                     </Border.Background>
                 </Border>
 

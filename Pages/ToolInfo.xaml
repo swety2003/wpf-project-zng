@@ -91,7 +91,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="0" Content="{Binding toolName}"/>
-                                <Image Grid.Column="1" Width="200" Source="https://i0.hdslb.com/bfs/archive/33881d1d76ab6fb603c49ae2e76c495c529a5bc3.jpg" />
+                                <Image Grid.Column="1" Width="200" Source="{Binding image,Converter={StaticResource ImageUrlConverter}}" />
                                 <Label Grid.Column="2" Content="{Binding rfidCode}"/>
                                 <Label Grid.Column="3" Content="{Binding subcabinetId}"/>
                                 <Label Grid.Column="4" Content="{Binding cabinetgridId}"/>

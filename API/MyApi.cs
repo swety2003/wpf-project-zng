@@ -777,7 +777,7 @@ namespace WPF_Project.API
                 }
 
 
-
+                public string image { get; set; }
 
                 /// <summary>
                 /// 

@@ -141,7 +141,7 @@ namespace WPF_Project
 #if DEBUG
             if (!IsLogin)
             {
-                API.APICOMMON.SetToken("eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImJlMzcwOGMyLTA1MzEtNDkwZS05OWNmLTBmYmYyNGE1MDI1ZCJ9.aI73IMVZUSPZ-N39ahHO6YAcUvtD5VQRB27Do0YOoED2Aoz6Gh2ZyA5vaq-UFSeLiLBkjhxQoo0UbN7eO_P6dA");
+                API.APICOMMON.SetToken("eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjEzZjQ3M2VlLTRhM2MtNDc4NS1hMGYxLTM1NDgwNjcxYjc1NiJ9.lQsNM3C4EwYAwJdq0P4HbwrkCjp5Iv_Em7ouKnWw3WJ8O-7jEM4hBz2hgYoE4LQoeNDhKauqvMYUjvZvBOvvZQ");
                 IsLogin = true;
             }
 #else
