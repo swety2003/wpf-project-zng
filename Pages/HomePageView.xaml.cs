@@ -46,6 +46,19 @@ namespace WPF_Project.Pages
         {
             StaticValues.Toparea.Visibility = Visibility.Collapsed;
 
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+
+            StaticValues.MainWindow.NagivateTo(new ToolInfo());
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            StaticValues.MainWindow.NagivateTo(new UsageLog());
 
         }
     }

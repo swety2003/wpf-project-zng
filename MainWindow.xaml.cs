@@ -138,6 +138,13 @@ namespace WPF_Project
         }
         public async Task EnsuerLoginAsync()
         {
+#if DEBUG
+            if (!IsLogin)
+            {
+                API.APICOMMON.SetToken("eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6ImJlMzcwOGMyLTA1MzEtNDkwZS05OWNmLTBmYmYyNGE1MDI1ZCJ9.aI73IMVZUSPZ-N39ahHO6YAcUvtD5VQRB27Do0YOoED2Aoz6Gh2ZyA5vaq-UFSeLiLBkjhxQoo0UbN7eO_P6dA");
+                IsLogin = true;
+            }
+#else
 
             if (!IsLogin)
             {
@@ -199,6 +206,7 @@ namespace WPF_Project
                 //LoginSuccess();
             }
 
+#endif
 
         }
 

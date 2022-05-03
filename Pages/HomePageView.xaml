@@ -94,7 +94,7 @@
             </StackPanel>
         </Button>
 
-        <Button Grid.Row="2" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1">
+        <Button Grid.Row="2" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1" Click="Button_Click_3">
             <Button.Background>
                 <ImageBrush ImageSource="..\Assets\AdminView\编组@2x.png"/>
             </Button.Background>
@@ -132,7 +132,7 @@
             </StackPanel>
         </Button>
 
-        <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1">
+        <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1" Click="Button_Click_2">
             <Button.Background>
                 <ImageBrush ImageSource="..\Assets\AdminView\编组@2x.png"/>
             </Button.Background>

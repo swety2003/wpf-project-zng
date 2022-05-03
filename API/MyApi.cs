@@ -22,8 +22,10 @@ namespace WPF_Project.API
     {
         private static string GUID = "core.admin";
 
-        public static string server { get; set; } 
-            //= "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3";
+        public static string ServerType = "/dev-api";
+
+        public static string server { get; set; }
+        //= "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3";
 
         public static Request request { get; set; }
 
@@ -35,7 +37,7 @@ namespace WPF_Project.API
 
         public static void EnsuerInit()
         {
-            if(request == null)
+            if (request == null)
             {
                 request = new Request();
 
@@ -57,6 +59,7 @@ namespace WPF_Project.API
 
         public static void SetToken(string token)
         {
+            EnsuerInit();
             request.RefreshToken(token);
         }
     }
@@ -66,23 +69,23 @@ namespace WPF_Project.API
     {
 
 
-        
 
-        public static async Task<string> LoginAsync(string id,string pwd)
+
+        public static async Task<string> LoginAsync(string id, string pwd)
         {
             APICOMMON.EnsuerInit();
             APICOMMON.ClearToken();
-            string path = "";
-            var url = $"{APICOMMON.server}/dev-api/login";
+            string path = $"{APICOMMON.ServerType}/login";
+            var url = $"{APICOMMON.server}{path}";
             //Dictionary<string, string> data = new Dictionary<string, string>();
             Dictionary<String, String> data = new Dictionary<String, String>();
 
 
-            data.Add("username", id );
+            data.Add("username", id);
             data.Add("password", pwd);
 
 
-            var r =await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
+            var r = await APICOMMON.request.PostJson(url, JsonConvert.SerializeObject(data));
 
             return r;
 
@@ -98,8 +101,8 @@ namespace WPF_Project.API
             APICOMMON.EnsuerInit();
             APICOMMON.ClearToken();
 
-            string path = "";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/user/login";
+            string path = $"{APICOMMON.ServerType}/cupboard/user/login";
+            var url = $"{APICOMMON.server}{path}";
             //Dictionary<string, string> data = new Dictionary<string, string>();
 
             Dictionary<String, String> data = new Dictionary<String, String>();
@@ -202,13 +205,13 @@ namespace WPF_Project.API
 
         }
 
-        public static async Task<string> switchList(string pageNum, string pageSize,string cabinetgroupId)
+        public static async Task<string> switchList(string pageNum, string pageSize, string cabinetgroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolswitch/list";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolswitch/list";
+            var url = $"{APICOMMON.server}{path}";
 
-            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3//dev-api/cupboard/toolswitch/list";
+            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3/{APICOMMON.ServerType}/cupboard/toolswitch/list";
 
 
             //var c=url == url1;
@@ -225,13 +228,13 @@ namespace WPF_Project.API
 
         }
 
-        public static async Task<string> switchListAdd(string switchName, string switchIp, string switchPort,string cabinetgroupId)
+        public static async Task<string> switchListAdd(string switchName, string switchIp, string switchPort, string cabinetgroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolswitch";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolswitch";
+            var url = $"{APICOMMON.server}{path}";
 
-            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3//dev-api/cupboard/toolswitch/list";
+            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3/{APICOMMON.ServerType}/cupboard/toolswitch/list";
 
 
             //var c=url == url1;
@@ -255,8 +258,8 @@ namespace WPF_Project.API
         public static async Task<string> Edit(string switchName, string switchIp, string switchPort, string cabinetgroupId, string switchId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolswitch";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolswitch";
+            var url = $"{APICOMMON.server}{path}";
 
             Dictionary<String, String> data = new Dictionary<String, String>();
 
@@ -277,10 +280,10 @@ namespace WPF_Project.API
         public static async Task<string> switchDel(string id)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolswitch";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolswitch";
+            var url = $"{APICOMMON.server}{path}";
 
-            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3//dev-api/cupboard/toolswitch/list";
+            //var url1 = "https://console-mock.apipost.cn/app/mock/project/9cce2996-185a-4aa6-9589-ef93747e1be3/{APICOMMON.ServerType}/cupboard/toolswitch/list";
 
 
             //var c=url == url1;
@@ -384,8 +387,8 @@ namespace WPF_Project.API
         public static async Task<string> GroupList(string pageNum, string pageSize)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolcabinetgroup/list";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolcabinetgroup/list";
+            var url = $"{APICOMMON.server}{path}";
 
             Dictionary<String, String> data = new Dictionary<String, String>();
 
@@ -495,8 +498,8 @@ namespace WPF_Project.API
         public static async Task<string> GroupList(string pageNum, string pageSize, string cabinetgroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup/list";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolantennagroup/list";
+            var url = $"{APICOMMON.server}{path}";
 
 
 
@@ -515,8 +518,8 @@ namespace WPF_Project.API
         public static async Task<string> Add(string antennagroupName, string antennagroupIp, string antennagroupPort, string cabinetgroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolantennagroup";
+            var url = $"{APICOMMON.server}{path}";
 
             Dictionary<String, String> data = new Dictionary<String, String>();
 
@@ -538,8 +541,8 @@ namespace WPF_Project.API
         public static async Task<string> Del(string id)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolantennagroup";
+            var url = $"{APICOMMON.server}{path}";
 
 
             Dictionary<String, String> data = new Dictionary<String, String>();
@@ -552,11 +555,11 @@ namespace WPF_Project.API
             return r;
         }
 
-        public static async Task<string> Edit(string antennagroupName, string antennagroupIp, string antennagroupPort, string cabinetgroupId,string antennagroupId)
+        public static async Task<string> Edit(string antennagroupName, string antennagroupIp, string antennagroupPort, string cabinetgroupId, string antennagroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/toolantennagroup";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolantennagroup";
+            var url = $"{APICOMMON.server}{path}";
 
             Dictionary<String, String> data = new Dictionary<String, String>();
 
@@ -580,7 +583,7 @@ namespace WPF_Project.API
 
 
     //
-    public  static class ToolDoor
+    public static class ToolDoor
     {
 
 
@@ -679,9 +682,9 @@ namespace WPF_Project.API
 
         public static async Task<string> Get(string pageNum, string pageSize, string cabinetgroupId)
         {
-            string path = "dev-api/cupboard/tooldoor/list";
+            string path = $"{APICOMMON.ServerType}/cupboard/tooldoor/list";
             APICOMMON.EnsuerInit();
-            var url = $"{APICOMMON.server}/{path}";
+            var url = $"{APICOMMON.server}{path}";
 
 
 
@@ -698,12 +701,12 @@ namespace WPF_Project.API
 
         public static async Task<string> Edit(string doorName, string doorIp,
             string doorPort, string cabinetgroupId, string doorId,
-            string account,string password
+            string account, string password
             )
         {
             APICOMMON.EnsuerInit();
-            string path = "dev-api/cupboard/tooldoor";
-            var url = $"{APICOMMON.server}/{path}";
+            string path = $"{APICOMMON.ServerType}/cupboard/tooldoor";
+            var url = $"{APICOMMON.server}{path}";
 
             Dictionary<String, String> data = new Dictionary<String, String>();
 
@@ -729,8 +732,8 @@ namespace WPF_Project.API
             )
         {
             APICOMMON.EnsuerInit();
-            string path = "dev-api/cupboard/tooldoor";
-            var url = $"{APICOMMON.server}/{path}";
+            string path = $"{APICOMMON.ServerType}/cupboard/tooldoor";
+            var url = $"{APICOMMON.server}{path}";
 
             Dictionary<String, String> data = new Dictionary<String, String>();
 
@@ -761,7 +764,7 @@ namespace WPF_Project.API
             {
             }
 
-            public class RowsItem:NotifyBase
+            public class RowsItem : NotifyBase
             {
                 //public bool selected { get;set; }
 
@@ -883,8 +886,8 @@ namespace WPF_Project.API
         public static async Task<string> ByTool(string pageNum, string pageSize, string cabinetgroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "/dev-api/login";
-            var url = $"{APICOMMON.server}/dev-api/cupboard/user/toollist";
+            string path = $"{APICOMMON.ServerType}/login";
+            var url = $"{APICOMMON.server}{APICOMMON.ServerType}/cupboard/user/toollist";
 
 
 
@@ -990,8 +993,8 @@ namespace WPF_Project.API
         public static async Task<string> Toolsubcabinet(string pageNum, string pageSize, string cabinetgroupId)
         {
             APICOMMON.EnsuerInit();
-            string path = "dev-api/cupboard/toolsubcabinet/list";
-            var url = $"{APICOMMON.server}/{path}";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolsubcabinet/list";
+            var url = $"{APICOMMON.server}{path}";
 
 
             Dictionary<String, String> data = new Dictionary<String, String>();
@@ -1117,8 +1120,8 @@ namespace WPF_Project.API
         public static async Task<string> ToolcabinetGrid(string pageNum, string pageSize, string subcabinetId)
         {
             APICOMMON.EnsuerInit();
-            string path = "dev-api/cupboard/toolcabinetgrid/list";
-            var url = $"{APICOMMON.server}/{path}";
+            string path = $"{APICOMMON.ServerType}/cupboard/toolcabinetgrid/list";
+            var url = $"{APICOMMON.server}{path}";
 
 
             Dictionary<String, String> data = new Dictionary<String, String>();
@@ -1132,6 +1135,128 @@ namespace WPF_Project.API
 
         }
 
+
+
+        public class UserLogDT
+        {
+            public class @params
+            {
+            }
+
+            public class RowsItem
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public string searchValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string remark { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public @params @params { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int recorId { get; set; }
+                /// <summary>
+                /// 工具名称
+                /// </summary>
+                public string toolName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string tooTypeId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string image { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string rfidCode { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string warehouseId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string cabinetgroupId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string position { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string operationType { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string @operator { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string delFlag { get; set; }
+            }
+
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public int total { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<RowsItem> rows { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int code { get; set; }
+                /// <summary>
+                /// 查询成功
+                /// </summary>
+                public string msg { get; set; }
+            }
+
+        }
+
+        public static async Task<string> UserLogGet(string pageNum, string pageSize)
+        {
+            APICOMMON.EnsuerInit();
+            string path = $"{APICOMMON.ServerType}/cupboard/toolrecord/list";
+            var url = $"{APICOMMON.server}{path}";
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("pageNum", pageNum);
+            data.Add("pageSize", pageSize);
+            var r = await APICOMMON.request.Get(url, data);
+
+            return r;
+
+        }
 
 
 
