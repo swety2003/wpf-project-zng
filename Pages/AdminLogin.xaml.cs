@@ -100,10 +100,10 @@ namespace WPF_Project.Pages
 
                     StaticValues.MainWindow.IsLogin = true;
 
-                    StaticValues.MainWindow.LoginSuccess();
+                    StaticValues.MainWindow.SetUserName("张三");
 
 
-                    StaticValues.MainWindow.NagivateTo(new AdminView());
+                    StaticValues.MainWindow.NavigateTo(new AdminView());
 
 
                 }

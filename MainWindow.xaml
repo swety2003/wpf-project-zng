@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WPF_Project"
         WindowState="Maximized"
         d:Width="1080" WindowStyle="None"
+        Loaded="Window_Loaded"
         d:Height="1920"
         mc:Ignorable="d">
     <Window.Background>
@@ -40,7 +41,7 @@
                     </Button>
                     <Line X1="0" X2="1080" Y1="0" Y2="0" StrokeThickness="1" Stroke="White" VerticalAlignment="Bottom" />
                 </Grid>
-                <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="rootFrame" Source="Pages/HomePageView.xaml"/>
+                <Frame Grid.Row="1" NavigationUIVisibility="Hidden" x:Name="rootFrame"/>
                 <Grid x:Name="statueBar" Grid.Row="2" Height="150" Background="#30000000">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>

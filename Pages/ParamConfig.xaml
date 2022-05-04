@@ -563,7 +563,7 @@
                             <Label FontSize="40" Padding="30">工具柜管理系统</Label>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <RadioButton IsEnabled="False" Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
+                            <RadioButton Style="{DynamicResource RadioButtonStyle1}" Background="#50FFFFFF" BorderThickness="5" BorderBrush="#80FFFFFF"
                                      VerticalAlignment="Center" Margin="40 0 0 0" GroupName="sysType"/>
                             <Label FontSize="40" Padding="30">钥匙柜管理系统</Label>
                         </StackPanel>

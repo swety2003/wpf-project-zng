@@ -28,5 +28,21 @@ namespace WPF_Project.Common
 
             return cabinetgroupId;
         }
+
+        public static bool TryGetSysType()
+        {
+            var r = SettingProvider.Get("core.paramcfg");
+
+            JObject o = JObject.Parse(r);
+
+            bool IsKey = (bool)o["IsKey"];
+
+            if (IsKey == null)
+            {
+                IsKey = false;
+            }
+
+            return IsKey;
+        }
     }
 }

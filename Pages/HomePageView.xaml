@@ -7,7 +7,7 @@
       d:DesignHeight="1600" d:DesignWidth="1080"
       mc:Ignorable="d" 
       Title="HomePageView"
-      Loaded="Page_Loaded"
+      Loaded="Page_Loaded" Unloaded="Page_Unloaded"
       
       >
 

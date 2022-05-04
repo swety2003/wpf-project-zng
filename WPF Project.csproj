@@ -42,6 +42,7 @@
     <None Remove="Assets\HomeView\warning_fill%402x.png" />
     <None Remove="Assets\HomeView\编组 10%402x.png" />
     <None Remove="Assets\HomeView\首页%402x.png" />
+    <None Remove="Assets\Key\KeyBg.png" />
     <None Remove="Assets\scan%402x.png" />
     <None Remove="Assets\setting.png" />
     <None Remove="Assets\ToolGet\search%402x.png" />
@@ -155,6 +156,9 @@
     <Resource Include="Assets\HomeView\首页@2x.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Assets\Key\KeyBg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Assets\MainView\bg.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -200,6 +204,11 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="API\Key\" />
+    <Folder Include="Pages\ToolPages\" />
   </ItemGroup>
 
 </Project>

@@ -33,18 +33,20 @@ namespace WPF_Project.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NagivateTo(new ToolGet());
+            StaticValues.MainWindow.NavigateTo(new ToolGet());
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NagivateTo(new AdminLogin(),false);
+            StaticValues.MainWindow.NavigateTo(new AdminLogin(),false);
 
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             StaticValues.Toparea.Visibility = Visibility.Collapsed;
+            StaticValues.MainWindow.HideHomeBtn();
+
 
         }
 
@@ -52,14 +54,19 @@ namespace WPF_Project.Pages
         {
 
 
-            StaticValues.MainWindow.NagivateTo(new ToolInfo());
+            StaticValues.MainWindow.NavigateTo(new ToolInfo());
 
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NagivateTo(new UsageLog());
+            StaticValues.MainWindow.NavigateTo(new UsageLog());
 
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            StaticValues.MainWindow.ShowHomeBtn();
         }
     }
 }

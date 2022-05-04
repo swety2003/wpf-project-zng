@@ -30,6 +30,7 @@ namespace WPF_Project
         private DispatcherTimer dt;
         private MainVM vm=new();
         public bool IsLogin = false;
+        private bool SystemType { get; set; }
         public MainWindow()
         {
 
@@ -37,6 +38,14 @@ namespace WPF_Project
             StaticValues.MainWindow = this;
             StaticValues.Toparea = topBar;
             StaticValues.scanBtn = scanBtn;
+
+            SystemType=StaticValues.TryGetSysType();
+
+ 
+
+
+
+
             this.DataContext = vm;
             dt = new DispatcherTimer();
 
@@ -44,21 +53,44 @@ namespace WPF_Project
             dt.Tick += dt_Tick;
             dt.Start();
         }
+
+
+
+
+
+
         public void ChangeBackGround(string url)
         {
             windowBg.ImageSource = new BitmapImage(new Uri(url, UriKind.Relative));
         }
-        public void LoginSuccess()
+
+
+        public void ShowHomeBtn()
         {
             LoginSuccessBtn.Visibility = Visibility.Visible;
             loginLabel.Visibility = Visibility.Collapsed;
         }
+
+        public void HideHomeBtn()
+        {
+            LoginSuccessBtn.Visibility = Visibility.Collapsed;
+            loginLabel.Visibility = Visibility.Visible;
+            SetUserName("欢迎您，张三");
+        }
+
+        public void SetUserName(string nm)
+        {
+            loginLabel.Content = nm;
+            loginLabel.FontSize = 30;
+            loginLabel.Foreground =new SolidColorBrush( Color.FromRgb(255, 255, 255));
+        }
+
         public void SetTitle(string title)
         {
             titleTB.Text = title;
 
         }
-        public void NagivateTo(Page p,bool ensuerLogin=true)
+        public void NavigateTo(Page p,bool ensuerLogin=true)
         {
             if (ensuerLogin)
             {
@@ -72,6 +104,7 @@ namespace WPF_Project
             rootFrame.Navigate(p);
 
         }
+
         public string Week()
         {
             string[] weekdays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
@@ -79,6 +112,7 @@ namespace WPF_Project
 
             return week;
         }
+
         void dt_Tick(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -106,6 +140,7 @@ namespace WPF_Project
 
             }
         }
+
         public void ClearHistory()
         {
             if (!rootFrame.CanGoBack && !rootFrame.CanGoForward)
@@ -121,21 +156,24 @@ namespace WPF_Project
 
             rootFrame.Navigate(new PageFunction<string>() { RemoveFromJournal = true });
         }
+
         private void LoginSuccessBtn_Click(object sender, RoutedEventArgs e)
         {
             ClearHistory();
 
-            StaticValues.MainWindow.NagivateTo(new HomePageView());
+            StaticValues.MainWindow.NavigateTo(new HomePageView());
         }
 
         private void loginLabel_Click(object sender, RoutedEventArgs e)
         {
             EnsuerLoginAsync();
         }
+
         public bool AcquireLogin()
         {
             return true;
         }
+
         public async Task EnsuerLoginAsync()
         {
 #if DEBUG
@@ -173,7 +211,7 @@ namespace WPF_Project
                         {
                             StaticValues.MainWindow.IsLogin = true;
 
-                            StaticValues.MainWindow.LoginSuccess();
+                            //StaticValues.MainWindow.LoginSuccess();
 
                             API.APICOMMON.SetToken(token);
 
@@ -212,6 +250,22 @@ namespace WPF_Project
 
         private void LoginSuccessBtn_Click_1(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SystemType)
+            {
+                ChangeBackGround(@"Assets\Key\KeyBg.png");
+                NavigateTo(new Pages.KeyPages.Home(),false);
+            }
+            else
+            {
+                NavigateTo(new HomePageView(),false);
+            }
+
+
 
         }
     }

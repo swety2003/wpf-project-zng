@@ -12,29 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPF_Project.Common;
 
-namespace WPF_Project.Pages
+namespace WPF_Project.Pages.KeyPages
 {
     /// <summary>
-    /// AdminView.xaml 的交互逻辑
+    /// Home.xaml 的交互逻辑
     /// </summary>
-    public partial class AdminView : Page
+    public partial class Home : Page
     {
-        public AdminView()
+        public Home()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            StaticValues.MainWindow.NavigateTo(new ParamConfig());
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            StaticValues.MainWindow.NavigateTo(new AdminManage());
-
         }
     }
 }
