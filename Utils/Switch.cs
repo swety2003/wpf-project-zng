@@ -10,13 +10,10 @@ using System.Windows.Threading;
 
 namespace WPF_Project.Utils
 {
-    class Switch
+    internal class Switch
     {
-
-
         private string ip { get; set; }
         public string port { get; set; }
-
 
         public Switch(string ip,string port)
         {
@@ -29,13 +26,15 @@ namespace WPF_Project.Utils
         private ModbusTcpNet busTcpClient = null;
         private bool IsEnable = false;
         private DispatcherTimer showTimer = new DispatcherTimer();
-        public void connect()
+
+        // 登录并开门 输入点inputTxt 00 01 02 03 04 05...
+        public void connectAndOpenDoor(string inputTxt)
         {
             try
             {
                 if (IsEnable)
                 {
-                    MessageBox.Show("请勿重复建立连接!");
+                    Open(inputTxt);
                     return;
                 }
                 string ip = this.ip;
@@ -50,11 +49,7 @@ namespace WPF_Project.Utils
                 if (res.IsSuccess == true) //接收状态返回值
                 {
                     IsEnable = true;
-                    MessageBox.Show("开启连接成功");
-
-                    showTimer.Tick += new EventHandler(scanModBus);
-                    showTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-                    showTimer.Start();
+                    Open(inputTxt); 
                 }
                 else
                 {
@@ -67,75 +62,14 @@ namespace WPF_Project.Utils
             }
         }
 
-        private void scanModBus(object sender, EventArgs e)
+        // 检查门是否正常开启 输出点outputTxt 00 01 02 03 04 05...
+        public bool checkDoorStatus(string outputTxt)
         {
-            int busLen = 16;
-
-            try
-            {
-                if (!IsEnable)
-                {
-                    return;
-                }
-                if (busTcpClient == null)
-                {
-                    return;
-                }
-                string txt = "00000";
-                string btnTxt = "";
-                string btnITxt = "";
-                for (int i = 0; i < busLen; i++)
-                {
-                    txt = Convert.ToString(i);
-                    bool coil100 = busTcpClient.ReadCoil(txt).Content;   // 读取线圈100的通断
-                    bool coilI100 = busTcpClient.ReadCoil("x=2;" + txt).Content;   // 读取线圈100的通断
-
-
-                    if (i < 10)
-                    {
-                        btnTxt = "modBusBtnQ0" + i;
-                        btnITxt = "modBusBtnI0" + i;
-                    }
-                    else
-                    {
-                        btnTxt = "modBusBtnQ" + i;
-                        btnITxt = "modBusBtnI" + i;
-                    }
-                    //颜色指示
-
-                    //Button modBusBtn = modBus.FindName(btnTxt) as Button;
-                    //Button modBusBtnI = modBus.FindName(btnITxt) as Button;
-
-                    //if (coil100 == true)
-                    //{
-                    //    modBusBtn.Background = System.Windows.Media.Brushes.Red;
-                    //}
-                    //else
-                    //{
-                    //    modBusBtn.Background = System.Windows.Media.Brushes.Black;
-                    //}
-                    //if (coilI100 == true)
-                    //{
-                    //    modBusBtnI.Background = System.Windows.Media.Brushes.Red;
-                    //}
-                    //else
-                    //{
-                    //    modBusBtnI.Background = System.Windows.Media.Brushes.Black;
-                    //}
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                return;
-            }
-
-
+            bool coilI100 = busTcpClient.ReadCoil("x=2;" + outputTxt).Content;
+            return coilI100;
         }
 
-
-
+        // 断开连接
         public void DisConnect()
         {
             try
@@ -158,7 +92,7 @@ namespace WPF_Project.Utils
 
         public void Open(string txt)
         {
-            Console.WriteLine(txt);
+            //Console.WriteLine(txt);
             try
             {
                 if (!IsEnable)

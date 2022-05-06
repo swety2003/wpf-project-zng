@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using IntellectTestTool.UHFReader;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace WPF_Project.Pages
 
 
 
-            OPenDoorHandlerAsync();
+            OPenDoorHandlerAsync(Selected);
 
 
 
@@ -55,27 +56,72 @@ namespace WPF_Project.Pages
             //new ToolGetDialog1("系统提示", "门已打开，请取出工具后关闭柜门").ShowDialog();
         }
 
-        private async Task OPenDoorHandlerAsync()
+        //比对
+        private List<EpcInfo> Compare(List<EpcInfo> max, List<EpcInfo>min)
         {
+            var result = new List<EpcInfo>();
+
+            foreach (var item in max)
+            {
+                if (!min.Contains(item))
+                {
+                    result.Add(item);
+                }
+            }
+
+            return result;
+        }
+
+        //打开天线读数据
+        private async Task<List<EpcInfo>> ScanForEpcInfoAsync(String ip, string port)
+        {
+            List<EpcInfo> result = new List<EpcInfo>();
+            RWEPC rwepc = new RWEPC(ip,port);
+
+
+            rwepc.Connect();
+
+            rwepc.Connected = true;
+
+            Thread.Sleep(2000);
+
+
+
+            rwepc.EndScan();
+            result = await rwepc.GetEpcInfo();
+
+
+            rwepc.DisConnect();
+            return result;
+        }
+
+
+        private async Task OPenDoorHandlerAsync(List<API.ToolGet.ByToolDataType.RowsItem> items)
+        {
+            foreach (var item in items)
+            {
+                var detail = API.ToolGet.GetGridDetailById("");
+
+            }
+
+
+
+
 
             try
             {
-                RWEPC rwepc = new RWEPC("192.168.0.7", "20001");
+                //打开前
+                var before=await ScanForEpcInfoAsync("192.168.0.7", "20001");
 
+                //开关
+                Switch switchModbus = new Switch("192.168.0.12", "502");
+                switchModbus.connectAndOpenDoor("01");
+                switchModbus.DisConnect();
 
-                rwepc.Connect();
+                //打开后
+                var after =await ScanForEpcInfoAsync("192.168.0.7", "20001");
 
-                rwepc.Connected= true;
-
-                Thread.Sleep(2000);
-
-
-
-                rwepc.EndScan();
-                var before = await rwepc.GetEpcInfo();
-
-
-                rwepc.DisConnect();
+                
 
 
             }

@@ -42,6 +42,12 @@
     <None Remove="Assets\HomeView\warning_fill%402x.png" />
     <None Remove="Assets\HomeView\编组 10%402x.png" />
     <None Remove="Assets\HomeView\首页%402x.png" />
+    <None Remove="Assets\Key\Home\warning_fill%402x%281%29.png" />
+    <None Remove="Assets\Key\Home\warning_fill%402x%282%29.png" />
+    <None Remove="Assets\Key\Home\warning_fill%402x%283%29.png" />
+    <None Remove="Assets\Key\Home\warning_fill%402x%284%29.png" />
+    <None Remove="Assets\Key\Home\warning_fill%402x%285%29.png" />
+    <None Remove="Assets\Key\Home\warning_fill%402x.png" />
     <None Remove="Assets\Key\KeyBg.png" />
     <None Remove="Assets\scan%402x.png" />
     <None Remove="Assets\setting.png" />
@@ -159,6 +165,24 @@
     <Content Include="Assets\Key\KeyBg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\Key\Home\warning_fill@2x(1).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Key\Home\warning_fill@2x(2).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Key\Home\warning_fill@2x(3).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Key\Home\warning_fill@2x(4).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Key\Home\warning_fill@2x(5).png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Key\Home\warning_fill@2x.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\MainView\bg.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -187,6 +211,9 @@
     <Compile Update="Dialogs\ToolGetDialog1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\KeyPages\Tasks.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -201,6 +228,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Dialogs\ToolGetDialog1.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\KeyPages\Tasks.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

@@ -21,12 +21,12 @@ namespace WPF_Project.Pages.KeyPages
     /// <summary>
     /// Home.xaml 的交互逻辑
     /// </summary>
-    public partial class Home : Page
+    public partial class Tasks : Page
     {
-        public Home()
+        public Tasks()
         {
             InitializeComponent();
-            DataContext=new HomeVM();
+            DataContext=new TasksVM();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -36,26 +36,20 @@ namespace WPF_Project.Pages.KeyPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            StaticValues.MainWindow.NavigateTo(new ParamConfig());
+
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
 
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            StaticValues.MainWindow.NavigateTo(new Tasks());
-
-        }
     }
 
-    public class HomeVM : ObservableObject
+    public class TasksVM : ObservableObject
     {
         public string cabinetgroupId { get; set; }
 
-        public HomeVM()
+        public TasksVM()
         {
             PageLoadedCMD = new RelayCommand(PageLoaded);
             PageUnloadedCMD = new RelayCommand(PageUnloaded);
@@ -68,14 +62,15 @@ namespace WPF_Project.Pages.KeyPages
 
         private void PageLoaded()
         {
-            StaticValues.Toparea.Visibility = Visibility.Collapsed;
-            StaticValues.MainWindow.HideHomeBtn();
+            StaticValues.Toparea.Visibility = Visibility.Visible;
+            StaticValues.MainWindow.SetTitle("工作台");
+            //StaticValues.MainWindow.ShowHomeBtn();
 
         }
 
         private void PageUnloaded()
         {
-            StaticValues.MainWindow.ShowHomeBtn();
+            //StaticValues.MainWindow.ShowHomeBtn();
 
         }
 

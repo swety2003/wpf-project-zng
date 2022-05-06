@@ -1,5 +1,6 @@
 ﻿using DefaultWidgets.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -75,7 +76,7 @@ namespace WPF_Project.API
         {
             APICOMMON.EnsuerInit();
             APICOMMON.ClearToken();
-            string path = $"{APICOMMON.ServerType}/login";
+            string path = $"{APICOMMON.ServerType}/cupboard/user/login";
             var url = $"{APICOMMON.server}{path}";
             //Dictionary<string, string> data = new Dictionary<string, string>();
             Dictionary<String, String> data = new Dictionary<String, String>();
@@ -1258,6 +1259,163 @@ namespace WPF_Project.API
 
         }
 
+
+        public static async Task<JObject> GetGridDetailById(string id)
+        {
+            APICOMMON.EnsuerInit();
+            string path = $"{APICOMMON.ServerType}/cupboard/toolcabinetgrid/{id}";
+            var url = $"{APICOMMON.server}{path}";
+
+
+            var r = await APICOMMON.request.Get(url);
+
+            JObject o=JObject.Parse(r.ToString());
+
+            return o;
+
+        }
+
+
+        public class AlertInfoDT
+        {
+            public class @params
+            {
+            }
+
+            public class RowsItem
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public string searchValue { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string createTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateBy { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string updateTime { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string remark { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public @params @params { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int alarmId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string alarmTool { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string alarmType { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolTypeId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolType { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string image { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string rfidCode { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int warehouseId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string warehouseName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int cabinetgroupId { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string cabinetgroupName { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string position { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string @operator { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string delFlag { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string status { get; set; }
+            }
+
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public int total { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<RowsItem> rows { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public int code { get; set; }
+                /// <summary>
+                /// 查询成功
+                /// </summary>
+                public string msg { get; set; }
+            }
+
+        }
+
+        public static async Task<string> GetAlertInfo(string pageNum, string pageSize)
+        {
+            APICOMMON.EnsuerInit();
+            string path = $"{APICOMMON.ServerType}/cupboard/toolalarm/list";
+            var url = $"{APICOMMON.server}{path}";
+
+
+            Dictionary<String, String> data = new Dictionary<String, String>();
+
+            data.Add("pageNum", pageNum);
+            data.Add("pageSize", pageSize);
+            var r = await APICOMMON.request.Get(url, data);
+
+            return r;
+
+        }
 
 
     }

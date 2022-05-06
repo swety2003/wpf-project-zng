@@ -29,6 +29,11 @@ namespace WPF_Project.Pages
             InitializeComponent();
             DataContext = new AlertInfoVM();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class AlertInfoVM : ObservableObject
@@ -41,27 +46,15 @@ namespace WPF_Project.Pages
             ShowDetailCMD = new RelayCommand<string>((id) =>
             {
 
-                API.ToolGet.ByToolDataType.RowsItem selectedItem = null;
-                foreach (var item in AllTools.rows)
-                {
-                    if (item.toolId.ToString() == id.ToString())
-                    {
-                        selectedItem = item;
-                    }
-                }
-                if (selectedItem != null)
-                {
-                    new Dialogs.ToolInfo(item: selectedItem).ShowDialog();
-                }
             });
         }
 
         public ICommand PageLoadedCMD { get; }
         public ICommand ShowDetailCMD { get; }
 
-        private API.ToolGet.ByToolDataType.Root _allTools;
+        private API.ToolGet.AlertInfoDT.Root _allTools;
 
-        public API.ToolGet.ByToolDataType.Root AllTools
+        public API.ToolGet.AlertInfoDT.Root AllAlerts
         {
             get => _allTools;
             private set => SetProperty(ref _allTools, value);
@@ -69,21 +62,18 @@ namespace WPF_Project.Pages
 
         private void PageLoaded()
         {
-            this.cabinetgroupId = StaticValues.TryGetCabID();
-            StaticValues.MainWindow.topBar.Visibility = Visibility.Visible;
-            StaticValues.MainWindow.SetTitle("工具查询");
 
-            if (this.cabinetgroupId != null)
-            {
-                LoadDataAsync();
-            }
+            StaticValues.MainWindow.topBar.Visibility = Visibility.Visible;
+            StaticValues.MainWindow.SetTitle("报警查询");
+
+            LoadDataAsync();
 
         }
         private async Task LoadDataAsync()
         {
-            var r = await API.ToolGet.ByTool("1", "10", cabinetgroupId);
+            var r = await API.ToolGet.GetAlertInfo("1", "10");
 
-            AllTools = JsonConvert.DeserializeObject<API.ToolGet.ByToolDataType.Root>(r);
+            AllAlerts = JsonConvert.DeserializeObject<API.ToolGet.AlertInfoDT.Root>(r);
 
 
 

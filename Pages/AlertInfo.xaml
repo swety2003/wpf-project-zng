@@ -3,11 +3,113 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPF_Project.Pages"
+      xmlns:local="clr-namespace:WPF_Project.Pages" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1080"
       Title="AlertInfo">
-    <Grid>
-        
-    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction
+                        Command="{Binding PageLoadedCMD}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <StackPanel>
+
+        <StackPanel.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontSize" Value="50" />
+            </Style>
+        </StackPanel.Resources>
+
+        <Label Margin="40 10" Content="报警记录"/>
+        <Border CornerRadius="10" Background="#30FFFFFF" Margin="30 10" Padding="0 0 0 10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Width="1000" Grid.Row="1" Margin="10 20">
+                    <Grid.Resources>
+                        <Style TargetType="Label" >
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="报警工具"/>
+                    <Label Grid.Column="1" Content="报警类型"/>
+                    <Label Grid.Column="2" Content="rfid"/>
+                    <Label Grid.Column="3" Content="状态"/>
+                    <Label Grid.Column="4" Content="报警时间"/>
+                    <Label Grid.Column="5" Content="操作"/>
+
+
+
+
+                </Grid>
+
+                <ListView Grid.Row="2" Background="Transparent" BorderThickness="0" 
+                          ItemsSource="{Binding AllAlerts.rows}" >
+                    <ListView.Resources>
+                        <Style TargetType="Label" >
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <!--<Setter Property="BorderThickness" Value="1 0 1 0"/>
+                                        <Setter Property="BorderBrush" Value="#50FFFFFF"/>-->
+                            <Setter Property="FontSize" Value="30"/>
+                            <Setter Property="Margin" Value="10 0"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <Grid Width="1000">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="400"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Content="{Binding alarmTool}"/>
+                                <Label Grid.Column="1" Content="{Binding alarmType}" />
+                                <Label Grid.Column="2" Content="{Binding rfidCode}"/>
+                                <Label Grid.Column="3" Content="{Binding status}"/>
+                                <Label Grid.Column="4" Content="{Binding createTime}"/>
+                                <StackPanel Grid.Column="5" VerticalAlignment="Center">
+                                    <!--<Button Style="{DynamicResource ButtonStyle1}" 
+                                            Command="{Binding ElementName=root, Path=DataContext.ShowDetailCMD}" 
+                                            CommandParameter="{Binding toolId}" FontSize="30" BorderThickness="0"
+                                            Height="80" Background="Transparent" Foreground="Gold" Content="查看详情">
+                                    </Button>-->
+                                    <Button Style="{DynamicResource ButtonStyle1}" Click="Button_Click" Tag="{Binding toolId}"
+                                            CommandParameter="{Binding toolId}" FontSize="30" BorderThickness="0"
+                                            Height="80" Background="Transparent" Foreground="Gold" Content="处理">
+                                    </Button>
+                                </StackPanel>
+
+
+
+                            </Grid>
+                        </ItemContainerTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+    </StackPanel>
 </Page>

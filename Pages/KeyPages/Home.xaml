@@ -3,12 +3,158 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPF_Project.Pages.KeyPages"
+      xmlns:local="clr-namespace:WPF_Project.Pages.KeyPages" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1920" d:DesignWidth="1080"
       Title="Home">
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction
+                        Command="{Binding PageLoadedCMD}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction
+                        Command="{Binding PageUnloadedCMD}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="400"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2">
+            <Grid>
+                <Label HorizontalAlignment="Center" Foreground="White" FontSize="60" Margin="40" Content="I-US3智能钥匙管理系统"/>
+                <Button HorizontalAlignment="Right" Width="160" BorderThickness="0" Style="{StaticResource ButtonStyle1}" 
+                        Background="Transparent" Click="Button_Click">
+                    <Image Height="80" Source="..\..\Assets\setting.png">
+                    </Image>
+                </Button>
+            </Grid>
+            <Image Source="..\..\Assets\HomeView\首页@2x.png"/>
+        </StackPanel>
+
+
+        <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Margin="40" BorderThickness="0" Click="Button_Click_1">
+            <Button.Background>
+                <ImageBrush ImageSource="..\..\Assets\AdminView\编组@2x.png"/>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="..\..\Assets\Key\Home\warning_fill@2x(3).png" Height="100"/>
+                <Label FontSize="40" HorizontalAlignment="Center" Foreground="White" Margin="0 30 0 0" Content="工作台"/>
+                <Label FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">
+                    <Label.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1 0">
+                            <GradientStop Color="#FFFFFF" Offset="0" />
+                            <GradientStop Color="#73f58d" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                    START
+                </Label>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="3" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1">
+            <Button.Background>
+                <ImageBrush ImageSource="..\..\Assets\AdminView\编组@2x.png"/>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="..\..\Assets\Key\Home\warning_fill@2x(5).png" Height="100"/>
+                <Label FontSize="40" HorizontalAlignment="Center" Foreground="White" Margin="0 30 0 0" Content="系统设置"/>
+                <Label FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">
+                    <Label.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1 0">
+                            <GradientStop Color="#FFFFFF" Offset="0" />
+                            <GradientStop Color="#73f58d" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                    START
+                </Label>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="3" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0">
+            <Button.Background>
+                <ImageBrush ImageSource="..\..\Assets\AdminView\编组@2x.png"/>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="..\..\Assets\Key\Home\warning_fill@2x(4).png" Height="100"/>
+                <Label FontSize="40" HorizontalAlignment="Center" Foreground="White" Margin="0 30 0 0" Content="即时取用"/>
+                <Label FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">
+                    <Label.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1 0">
+                            <GradientStop Color="#FFFFFF" Offset="0" />
+                            <GradientStop Color="#73f58d" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                    START
+                </Label>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="2" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1" Click="Button_Click_3">
+            <Button.Background>
+                <ImageBrush ImageSource="..\..\Assets\AdminView\编组@2x.png"/>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="..\..\Assets\Key\Home\warning_fill@2x(1).png" Height="100"/>
+                <Label FontSize="40" HorizontalAlignment="Center" Foreground="White" Margin="0 30 0 0" Content="使用记录"/>
+                <Label FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">
+                    <Label.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1 0">
+                            <GradientStop Color="#FFFFFF" Offset="0" />
+                            <GradientStop Color="#73f58d" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                    START
+                </Label>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="2" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0">
+            <Button.Background>
+                <ImageBrush ImageSource="..\..\Assets\AdminView\编组@2x.png"/>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="..\..\Assets\Key\Home\warning_fill@2x(2).png" Height="100"/>
+                <Label FontSize="40" HorizontalAlignment="Center" Foreground="White" Margin="0 30 0 0" Content="报警信息"/>
+                <Label FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">
+                    <Label.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1 0">
+                            <GradientStop Color="#FFFFFF" Offset="0" />
+                            <GradientStop Color="#73f58d" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                    START
+                </Label>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="1" Style="{DynamicResource ButtonStyle1}" Margin="40,40,40,40" BorderThickness="0" Grid.Column="1" Click="Button_Click_2">
+            <Button.Background>
+                <ImageBrush ImageSource="..\..\Assets\AdminView\编组@2x.png"/>
+            </Button.Background>
+            <StackPanel>
+                <Image Source="..\..\Assets\Key\Home\warning_fill@2x.png" Height="100"/>
+                <Label FontSize="40" HorizontalAlignment="Center" Foreground="White" Margin="0 30 0 0" Content="实用信息"/>
+                <Label FontSize="40" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">
+                    <Label.Foreground>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1 0">
+                            <GradientStop Color="#FFFFFF" Offset="0" />
+                            <GradientStop Color="#73f58d" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Foreground>
+                    START
+                </Label>
+            </StackPanel>
+        </Button>
     </Grid>
+
 </Page>

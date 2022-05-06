@@ -68,5 +68,11 @@ namespace WPF_Project.Pages
         {
             StaticValues.MainWindow.ShowHomeBtn();
         }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            StaticValues.MainWindow.NavigateTo(new AlertInfo());
+
+        }
     }
 }

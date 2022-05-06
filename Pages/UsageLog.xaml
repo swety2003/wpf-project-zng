@@ -124,8 +124,7 @@
                                     <Label Grid.Column="3" Content="{Binding rfidCode}"/>
                                     <Label Grid.Column="4" Content="{Binding subcabinetId}"/>
                                     <Label Grid.Column="5" Content="{Binding cabinetgridId}"/>
-                                    <Label Grid.Column="6" Content="{Binding operationType}">
-                                         </Label>
+                                    <Label Grid.Column="6" Content="{Binding operationType}"></Label>
 
 
 

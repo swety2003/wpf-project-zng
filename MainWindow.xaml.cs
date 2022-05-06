@@ -161,7 +161,15 @@ namespace WPF_Project
         {
             ClearHistory();
 
-            StaticValues.MainWindow.NavigateTo(new HomePageView());
+            if (SystemType)
+            {
+                ChangeBackGround(@"Assets\Key\KeyBg.png");
+                NavigateTo(new Pages.KeyPages.Home(), false);
+            }
+            else
+            {
+                NavigateTo(new HomePageView(), false);
+            }
         }
 
         private void loginLabel_Click(object sender, RoutedEventArgs e)
@@ -176,7 +184,7 @@ namespace WPF_Project
 
         public async Task EnsuerLoginAsync()
         {
-#if DEBUG
+#if !DEBUG
             if (!IsLogin)
             {
                 API.APICOMMON.SetToken("eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjEzZjQ3M2VlLTRhM2MtNDc4NS1hMGYxLTM1NDgwNjcxYjc1NiJ9.lQsNM3C4EwYAwJdq0P4HbwrkCjp5Iv_Em7ouKnWw3WJ8O-7jEM4hBz2hgYoE4LQoeNDhKauqvMYUjvZvBOvvZQ");
@@ -219,7 +227,7 @@ namespace WPF_Project
                             var r = new CustomDialog("系统提示", "欢迎你，张三\n 是否快速取还？").ShowDialog();
                             if (r == true)
                             {
-                                StaticValues.MainWindow.NagivateTo(new ToolGet());
+                                StaticValues.MainWindow.NavigateTo(new ToolGet());
 
                             }
 

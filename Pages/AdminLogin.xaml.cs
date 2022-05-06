@@ -83,6 +83,9 @@ namespace WPF_Project.Pages
 
             CheckCfg();
             var id = "admin";
+#if DEBUG
+            passwdBox.Password = "admin123";
+#endif
             var r = await API.AdminLogin.LoginAsync(id, passwdBox.Password);
             try
             {
