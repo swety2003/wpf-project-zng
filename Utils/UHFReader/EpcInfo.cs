@@ -75,6 +75,8 @@ namespace IntellectTestTool.UHFReader
                 this.PropertyChanged(this, new PropertyChangedEventArgs(obj));
             }
         }
+
+
         public EpcInfo(string no, string epc, int num, string rssi, string antenna)
         {
             _no = no;

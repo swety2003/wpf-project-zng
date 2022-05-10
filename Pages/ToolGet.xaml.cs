@@ -56,21 +56,6 @@ namespace WPF_Project.Pages
             //new ToolGetDialog1("系统提示", "门已打开，请取出工具后关闭柜门").ShowDialog();
         }
 
-        //比对
-        private List<EpcInfo> Compare(List<EpcInfo> max, List<EpcInfo>min)
-        {
-            var result = new List<EpcInfo>();
-
-            foreach (var item in max)
-            {
-                if (!min.Contains(item))
-                {
-                    result.Add(item);
-                }
-            }
-
-            return result;
-        }
 
         //打开天线读数据
         private async Task<List<EpcInfo>> ScanForEpcInfoAsync(String ip, string port)
@@ -96,39 +81,131 @@ namespace WPF_Project.Pages
         }
 
 
-        private async Task OPenDoorHandlerAsync(List<API.ToolGet.ByToolDataType.RowsItem> items)
+        public class ToolGetMetaData
         {
+            public string cabinetgroupId { get; set; }
+            public string cabinetgridId { get; set; }
+
+            public string subcabinetId { get; set; }
+
+            public string antennagroupIp { get; set; }
+            public string antennagroupPort { get; set; }
+            public string switchIp { get; set; }
+            public string switchPort { get; set; }
+            public int inputPoint { get; set; }
+            public int outputPoint { get; set; }
+        }
+
+        public class ToolCompareData
+        {
+            public class Root
+            {
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolCabinetgroup { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolSubcabinet { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public string toolCabinetgrid { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<string> beforeIds { get; set; }
+                /// <summary>
+                /// 
+                /// </summary>
+                public List<string> afterIds { get; set; }
+            }
+
+        }
+
+        private async Task OPenDoorHandlerAsync(
+            List<API.ToolGet.ByToolDataType.RowsItem> items)
+        {
+            List<ToolGetMetaData> metaDatas=new List<ToolGetMetaData>();
+            List<ToolCompareData.Root> compareDatas=new List<ToolCompareData.Root>();
+
+            if (items.Count == 0)
+            {
+                MessageBox.Show("未选择工具！");
+            }
             foreach (var item in items)
             {
-                var detail = API.ToolGet.GetGridDetailById("");
+                var detail =await API.ToolGet
+                    .GetGridDetailById(item.cabinetgridId.ToString());
+                var data = detail["data"];
+                //metaDatas.Add(new ToolGetMetaData
+                //{
+                //    cabinetgridId=(string)data["cabinetgridId"],
+                //    cabinetgroupId = (string)data["cabinetgroupId"],
+                //    subcabinetId = (string)data["subcabinetId"],
+                //    antennagroupIp = (string)data["antennagroupIp"],
+                //    antennagroupPort = (string)data["antennagroupPort"],
+                //    switchIp = (string)data["switchIp"],
+                //    switchPort = (string)data["switchPort"],
+                //    inputPoint = (int)data["inputPoint"],
+                //    outputPoint = (int)data["outputPoint"]
+                //});
+                metaDatas.Add(data.ToObject<ToolGetMetaData>());
 
             }
 
 
-
-
-
-            try
+            foreach (var item in metaDatas)
             {
-                //打开前
-                var before=await ScanForEpcInfoAsync("192.168.0.7", "20001");
+                try
+                {
+                    //打开前
+                    var before = await ScanForEpcInfoAsync(item.antennagroupIp, item.antennagroupPort);
 
-                //开关
-                Switch switchModbus = new Switch("192.168.0.12", "502");
-                switchModbus.connectAndOpenDoor("01");
-                switchModbus.DisConnect();
+                    //开关
+                    Switch switchModbus = new Switch(item.switchIp, item.switchPort);
+                    switchModbus.connectAndOpenDoor(item.inputPoint.ToString());
 
-                //打开后
-                var after =await ScanForEpcInfoAsync("192.168.0.7", "20001");
+                    var a = new CustomDialog("系统提示", "门已打开，请取出工具后关闭柜门");
 
-                
+                    Task.Factory.StartNew(() => {
+                        while( switchModbus.checkDoorStatus(item.inputPoint.ToString()))
+                        {
+                            Console.WriteLine("waiting for close。。。");
+                        }
+                    }).Wait(10 * 1000);
+
+
+
+
+
+                    switchModbus.DisConnect();
+
+
+                    //打开后
+                    var after = await ScanForEpcInfoAsync(item.antennagroupIp, item.antennagroupPort);
+
+                    compareDatas.Add(new ToolCompareData.Root{
+                        toolSubcabinet=item.subcabinetId,
+                        toolCabinetgrid=item.cabinetgridId,
+                        toolCabinetgroup=item.cabinetgroupId,
+                        beforeIds=new List<string>(),
+                        afterIds=new List<string>(),
+                    });
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
 
 
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
 
 
 

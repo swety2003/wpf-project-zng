@@ -75,7 +75,11 @@ namespace WPF_Project
         {
             LoginSuccessBtn.Visibility = Visibility.Collapsed;
             loginLabel.Visibility = Visibility.Visible;
-            SetUserName("欢迎您，张三");
+            if (IsLogin)
+            {
+                SetUserName("欢迎您，张三");
+
+            }
         }
 
         public void SetUserName(string nm)
