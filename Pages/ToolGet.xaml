@@ -108,7 +108,7 @@
 
                             </Grid>
                             
-                            <ListView Grid.Row="2" Background="Transparent" BorderThickness="0" ItemsSource="{Binding ToolsByTool.rows}" >
+                            <ListView x:Name="toolsLV" Grid.Row="2" Background="Transparent" BorderThickness="0" ItemsSource="{Binding ToolsByTool.rows}" >
                                 <ListView.Resources>
                                     <Style TargetType="Label" >
                                         <Setter Property="Foreground" Value="White"/>
@@ -182,7 +182,7 @@
                                             <Label Grid.Column="5" Content="{Binding cabinetgridId}"/>
                                             <Label Grid.Column="6" Content="{Binding status}"/>
                                             <StackPanel Grid.Column="7" VerticalAlignment="Center">
-                                                <Button Style="{DynamicResource ButtonStyle1}" FontSize="30" BorderThickness="0" Height="80" Background="Transparent" Foreground="Gold" Content="取用"/>
+                                                <Button Style="{DynamicResource ButtonStyle1}" FontSize="30" BorderThickness="0" Height="80" Background="Transparent" Foreground="Gold" Content="取用" Click="Button_Click_3" Command="{Binding toolgetCMD}" CommandParameter="{Binding toolId}"/>
                                             </StackPanel>
 
 

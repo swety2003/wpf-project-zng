@@ -356,7 +356,7 @@ namespace WPF_Project.API
                 /// <summary>
                 /// 
                 /// </summary>
-                public int warehouseId { get; set; }
+                public int? warehouseId { get; set; }
                 /// <summary>
                 /// 
                 /// </summary>
@@ -1416,6 +1416,23 @@ namespace WPF_Project.API
             return r;
 
         }
+
+
+        public static async Task<JObject> Compare(Object compareData)
+        {
+            APICOMMON.EnsuerInit();
+            string path = $"{APICOMMON.ServerType}/tool/matching";
+            var url = $"{APICOMMON.server}{path}";
+
+
+            var r = await APICOMMON.request.PostJson(url,JsonConvert.SerializeObject(compareData));
+
+            JObject o = JObject.Parse(r.ToString());
+
+            return o;
+
+        }
+
 
 
     }

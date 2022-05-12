@@ -104,9 +104,15 @@ namespace WPF_Project.Pages
             {
 
                 var r = await CabinetGroup.GroupList("1", "10");
+                try
+                {
+                    vm.CabinetGroupList = JsonConvert.DeserializeObject<CabinetGroup.GroupDataType.Root>(r);
 
-                vm.CabinetGroupList = JsonConvert.DeserializeObject<CabinetGroup.GroupDataType.Root>(r);
-                foreach(var item in vm.CabinetGroupList.rows)
+                }catch (Exception ex)
+                {
+
+                }
+                foreach (var item in vm.CabinetGroupList.rows)
                 {
                     if (item.cabinetgroupId.ToString() == cabinetgroupId)
                     {

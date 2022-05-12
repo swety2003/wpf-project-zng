@@ -1,4 +1,5 @@
 ﻿using IntellectTestTool.UHFReader;
+using Microsoft.Toolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -124,6 +125,18 @@ namespace WPF_Project.Pages
 
         }
 
+        public string GetToolIdbyRFID(string rfid)
+        {
+            foreach (var i in vm.ToolsByTool.rows)
+            {
+                if (i.rfidCode == rfid)
+                {
+                    return i.toolId.ToString();
+                }
+            }
+            return "";
+        }
+
         private async Task OPenDoorHandlerAsync(
             List<API.ToolGet.ByToolDataType.RowsItem> items)
         {
@@ -139,23 +152,23 @@ namespace WPF_Project.Pages
                 var detail =await API.ToolGet
                     .GetGridDetailById(item.cabinetgridId.ToString());
                 var data = detail["data"];
-                //metaDatas.Add(new ToolGetMetaData
-                //{
-                //    cabinetgridId=(string)data["cabinetgridId"],
-                //    cabinetgroupId = (string)data["cabinetgroupId"],
-                //    subcabinetId = (string)data["subcabinetId"],
-                //    antennagroupIp = (string)data["antennagroupIp"],
-                //    antennagroupPort = (string)data["antennagroupPort"],
-                //    switchIp = (string)data["switchIp"],
-                //    switchPort = (string)data["switchPort"],
-                //    inputPoint = (int)data["inputPoint"],
-                //    outputPoint = (int)data["outputPoint"]
-                //});
-                metaDatas.Add(data.ToObject<ToolGetMetaData>());
+                metaDatas.Add(new ToolGetMetaData
+                {
+                    cabinetgridId = (string)data["cabinetgridId"],
+                    cabinetgroupId = (string)data["cabinetgroupId"],
+                    subcabinetId = (string)data["subcabinetId"],
+                    antennagroupIp = (string)data["antennagroupIp"],
+                    antennagroupPort = (string)data["antennagroupPort"],
+                    switchIp = (string)data["switchIp"],
+                    switchPort = (string)data["switchPort"],
+                    inputPoint = (int)data["inputPoint"],
+                    outputPoint = (int)data["outputPoint"]
+                });
+                //metaDatas.Add(data.ToObject<ToolGetMetaData>());
 
             }
 
-
+            //逐次运行直至全部取出
             foreach (var item in metaDatas)
             {
                 try
@@ -168,6 +181,7 @@ namespace WPF_Project.Pages
                     switchModbus.connectAndOpenDoor(item.inputPoint.ToString());
 
                     var a = new CustomDialog("系统提示", "门已打开，请取出工具后关闭柜门");
+                    a.ShowDialog();
 
                     Task.Factory.StartNew(() => {
                         while( switchModbus.checkDoorStatus(item.inputPoint.ToString()))
@@ -186,15 +200,22 @@ namespace WPF_Project.Pages
                     //打开后
                     var after = await ScanForEpcInfoAsync(item.antennagroupIp, item.antennagroupPort);
 
+                    var beforeIds = new List<string>();
+                    var afterIds = new List<string>();
+                    before.ForEach(x => beforeIds.Add(GetToolIdbyRFID( x.epc)));
+                    after.ForEach(x => afterIds.Add(GetToolIdbyRFID( x.epc)));
+
+
                     compareDatas.Add(new ToolCompareData.Root{
                         toolSubcabinet=item.subcabinetId,
                         toolCabinetgrid=item.cabinetgridId,
                         toolCabinetgroup=item.cabinetgroupId,
-                        beforeIds=new List<string>(),
-                        afterIds=new List<string>(),
+                        beforeIds=beforeIds,
+                        afterIds=afterIds,
                     });
 
-
+                    
+                    
 
                 }
                 catch (Exception ex)
@@ -207,14 +228,30 @@ namespace WPF_Project.Pages
             }
             
 
+            //逐次比对工具
+            foreach (var item in compareDatas)
+            {
+                var r = await API.ToolGet.Compare(item);
 
-
+                MessageBox.Show(r.ToString());
+            }
 
         }
 
 
 
+        //public ICommand toolgetCMD = new RelayCommand<string>(GetTool);
 
+        //public void GetTool(string id)
+        //{
+        //    foreach (var i in vm.ToolsByTool.rows)
+        //    {
+        //        if (i.toolId.ToString() == id)
+        //        {
+
+        //        }
+        //    }
+        //}
 
 
 
@@ -347,6 +384,13 @@ namespace WPF_Project.Pages
 
             }
 
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var tools = new List<API.ToolGet.ByToolDataType.RowsItem>();
+            tools.Add(toolsLV.SelectedItem as API.ToolGet.ByToolDataType.RowsItem);
+            OPenDoorHandlerAsync(tools);
         }
     }
 
