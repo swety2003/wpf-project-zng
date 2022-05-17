@@ -41,7 +41,7 @@ namespace DefaultWidgets.Utils
 
             httpClient.DefaultRequestHeaders.Authorization = authentication;
 
-            Console.WriteLine(httpClient.DefaultRequestHeaders.ToString()); 
+            //Console.WriteLine(httpClient.DefaultRequestHeaders.ToString()); 
         }
         /// <summary>
         /// 异步Get请求

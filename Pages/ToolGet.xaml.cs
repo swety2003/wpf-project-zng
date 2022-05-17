@@ -42,13 +42,22 @@ namespace WPF_Project.Pages
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
+            var tools = new List<API.ToolGet.ByToolDataType.RowsItem>();
+            foreach(var tool in toolsLV.SelectedItems)
+            {
+                tools.Add(tool as API.ToolGet.ByToolDataType.RowsItem);
 
+            }
 
-            var Selected = vm.ToolsByTool.rows.Where(item => item.selected == true).ToList();
+            try
+            {
+                OPenDoorHandlerAsync(tools);
 
+            }catch(Exception ex)
+            {
 
+            }
 
-            OPenDoorHandlerAsync(Selected);
 
 
 
@@ -69,32 +78,38 @@ namespace WPF_Project.Pages
 
             rwepc.Connected = true;
 
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
+            //Thread.Sleep(2000);
 
 
+            result = await rwepc.GetEpcInfo();
 
             rwepc.EndScan();
-            result = await rwepc.GetEpcInfo();
+
+            await Task.Delay(1000);
 
 
             rwepc.DisConnect();
+
+            Console.WriteLine($"扫描到了{result.Count()}个");
+
             return result;
         }
 
 
         public class ToolGetMetaData
         {
-            public string cabinetgroupId { get; set; }
-            public string cabinetgridId { get; set; }
+            public string? cabinetgroupId { get; set; }
+            public string? cabinetgridId { get; set; }
 
-            public string subcabinetId { get; set; }
+            public string? subcabinetId { get; set; }
 
-            public string antennagroupIp { get; set; }
-            public string antennagroupPort { get; set; }
-            public string switchIp { get; set; }
-            public string switchPort { get; set; }
-            public int inputPoint { get; set; }
-            public int outputPoint { get; set; }
+            public string? antennagroupIp { get; set; }
+            public string? antennagroupPort { get; set; }
+            public string? switchIp { get; set; }
+            public string? switchPort { get; set; }
+            public int? inputPoint { get; set; }
+            public int? outputPoint { get; set; }
         }
 
         public class ToolCompareData
@@ -116,11 +131,11 @@ namespace WPF_Project.Pages
                 /// <summary>
                 /// 
                 /// </summary>
-                public List<string> beforeIds { get; set; }
+                public List<string>? beforeIds { get; set; }
                 /// <summary>
                 /// 
                 /// </summary>
-                public List<string> afterIds { get; set; }
+                public List<string>? afterIds { get; set; }
             }
 
         }
@@ -152,18 +167,27 @@ namespace WPF_Project.Pages
                 var detail =await API.ToolGet
                     .GetGridDetailById(item.cabinetgridId.ToString());
                 var data = detail["data"];
-                metaDatas.Add(new ToolGetMetaData
+
+                try
                 {
-                    cabinetgridId = (string)data["cabinetgridId"],
-                    cabinetgroupId = (string)data["cabinetgroupId"],
-                    subcabinetId = (string)data["subcabinetId"],
-                    antennagroupIp = (string)data["antennagroupIp"],
-                    antennagroupPort = (string)data["antennagroupPort"],
-                    switchIp = (string)data["switchIp"],
-                    switchPort = (string)data["switchPort"],
-                    inputPoint = (int)data["inputPoint"],
-                    outputPoint = (int)data["outputPoint"]
-                });
+
+                    metaDatas.Add(new ToolGetMetaData
+                    {
+                        cabinetgridId = (string)data["cabinetgridId"],
+                        cabinetgroupId = (string)data["cabinetgroupId"],
+                        subcabinetId = (string)data["subcabinetId"],
+                        antennagroupIp = (string)data["antennagroupIp"],
+                        antennagroupPort = (string)data["antennagroupPort"],
+                        switchIp = (string)data["switchIp"],
+                        switchPort = (string)data["switchPort"],
+                        inputPoint = (int)data["inputPoint"]-1,
+                        outputPoint = (int)data["outputPoint"]-1
+                    });
+                }
+                catch
+                {
+
+                }
                 //metaDatas.Add(data.ToObject<ToolGetMetaData>());
 
             }
@@ -173,25 +197,38 @@ namespace WPF_Project.Pages
             {
                 try
                 {
-                    //打开前
+                    //打开前  这里就是  
                     var before = await ScanForEpcInfoAsync(item.antennagroupIp, item.antennagroupPort);
 
                     //开关
                     Switch switchModbus = new Switch(item.switchIp, item.switchPort);
-                    switchModbus.connectAndOpenDoor(item.inputPoint.ToString());
 
-                    var a = new CustomDialog("系统提示", "门已打开，请取出工具后关闭柜门");
-                    a.ShowDialog();
+                    try
+                    {
+                        switchModbus.connectAndOpenDoor(item.outputPoint.ToString());
 
-                    Task.Factory.StartNew(() => {
-                        while( switchModbus.checkDoorStatus(item.inputPoint.ToString()))
-                        {
-                            Console.WriteLine("waiting for close。。。");
-                        }
-                    }).Wait(10 * 1000);
+                    }catch (Exception ex)
+                    {
+                        continue;
+                    }
+                    bool daf;
+                    daf = switchModbus.checkDoorStatus(item.inputPoint.ToString());
 
 
+                    if (daf == true)
+                    {
+                        var a = new DoorCheck(switchModbus, item.inputPoint.ToString());
 
+                        a.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("开门失败！");
+
+                        switchModbus.DisConnect();
+
+                        return;
+                    }
 
 
                     switchModbus.DisConnect();
@@ -202,9 +239,11 @@ namespace WPF_Project.Pages
 
                     var beforeIds = new List<string>();
                     var afterIds = new List<string>();
-                    before.ForEach(x => beforeIds.Add(GetToolIdbyRFID( x.epc)));
-                    after.ForEach(x => afterIds.Add(GetToolIdbyRFID( x.epc)));
+                    //before.ForEach(x => beforeIds.Add(GetToolIdbyRFID( x.epc)));
+                    //after.ForEach(x => afterIds.Add(GetToolIdbyRFID( x.epc)));
 
+                    before.ForEach(x => beforeIds.Add(x.epc));
+                    after.ForEach(x => afterIds.Add(x.epc));
 
                     compareDatas.Add(new ToolCompareData.Root{
                         toolSubcabinet=item.subcabinetId,

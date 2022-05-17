@@ -10,7 +10,7 @@ using System.Windows.Threading;
 
 namespace WPF_Project.Utils
 {
-    internal class Switch
+    public class Switch
     {
         private string ip { get; set; }
         public string port { get; set; }
@@ -49,7 +49,8 @@ namespace WPF_Project.Utils
                 if (res.IsSuccess == true) //接收状态返回值
                 {
                     IsEnable = true;
-                    Open(inputTxt); 
+                    Open(inputTxt);
+
                 }
                 else
                 {
@@ -59,6 +60,7 @@ namespace WPF_Project.Utils
             catch (Exception ex)
             {
                 MessageBox.Show("开启连接失败!", ex.Message.ToString());
+                throw new Exception("无法开启连接！");
             }
         }
 

@@ -108,7 +108,7 @@
 
                             </Grid>
                             
-                            <ListView x:Name="toolsLV" Grid.Row="2" Background="Transparent" BorderThickness="0" ItemsSource="{Binding ToolsByTool.rows}" >
+                            <ListView x:Name="toolsLV" Grid.Row="2" Background="Transparent" BorderThickness="0" SelectionMode="Multiple" ItemsSource="{Binding ToolsByTool.rows}" >
                                 <ListView.Resources>
                                     <Style TargetType="Label" >
                                         <Setter Property="Foreground" Value="White"/>
@@ -124,7 +124,7 @@
                                     <ItemContainerTemplate>
                                         <Grid Width="1000">
                                             <Grid.Resources>
-                                                <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+                                                <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}" >
                                                     <Setter Property="SnapsToDevicePixels" Value="true" />
                                                     <Setter Property="OverridesDefaultStyle" Value="False" />
                                                     <Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisual}" />
@@ -171,7 +171,8 @@
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-                                            <CheckBox Style="{DynamicResource CheckBoxStyle}" Height="80" Width="80" IsChecked="{Binding selected}">
+                                            <CheckBox Style="{DynamicResource CheckBoxStyle}" Height="80" Width="80"  IsChecked="{Binding RelativeSource={RelativeSource FindAncestor,
+                                        AncestorType={x:Type ListViewItem}}, Path=IsSelected}" >
                                                 
                                             </CheckBox>
                                             

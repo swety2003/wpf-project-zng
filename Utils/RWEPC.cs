@@ -98,7 +98,7 @@ namespace WPF_Project.Utils
         public async Task<List<EpcInfo>> GetEpcInfo()
         {
 
-
+            //Task.Delay(2000);
             
 
 
@@ -919,7 +919,7 @@ namespace WPF_Project.Utils
                     if (fIsInventoryScan)
                     {
                         toStopThread = true;//标志，接收数据线程判断stop为true，正常情况下会自动退出线程           
-                        mythread.Abort();//若线程无法退出，强制结束
+                        //mythread.Abort();//若线程无法退出，强制结束
                         fIsInventoryScan = false;
                     }
                     fIsInventoryScan = false;
@@ -960,8 +960,28 @@ namespace WPF_Project.Utils
                 {
                     if ((frmcomportindex > 0) && (frmcomportindex < 256))
                     {
-                        fCmdRet = RWDev.CloseNetPort(frmcomportindex);
+
+                        try
+                        {
+                            fCmdRet = RWDev.CloseNetPort(frmcomportindex);
+
+                        }
+                        catch
+                        {
+
+                        }
+
+
+
+
                         if (fCmdRet == 0) frmcomportindex = -1;
+
+
+
+
+
+
+
                         Thread.Sleep(1000);
                     }
                     fComAdr = 255;

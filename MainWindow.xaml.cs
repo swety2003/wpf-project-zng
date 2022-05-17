@@ -41,7 +41,6 @@ namespace WPF_Project
 
             SystemType=StaticValues.TryGetSysType();
 
- 
 
 
 

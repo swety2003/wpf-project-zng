@@ -1424,6 +1424,7 @@ namespace WPF_Project.API
             string path = $"{APICOMMON.ServerType}/tool/matching";
             var url = $"{APICOMMON.server}{path}";
 
+            Console.WriteLine(JsonConvert.SerializeObject(compareData));
 
             var r = await APICOMMON.request.PostJson(url,JsonConvert.SerializeObject(compareData));
 

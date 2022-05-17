@@ -31,18 +31,25 @@ namespace WPF_Project.Common
 
         public static bool TryGetSysType()
         {
-            var r = SettingProvider.Get("core.paramcfg");
-
-            JObject o = JObject.Parse(r);
-
-            bool IsKey = (bool)o["IsKey"];
-
-            if (IsKey == null)
+            try
             {
-                IsKey = false;
-            }
 
-            return IsKey;
+                var r = SettingProvider.Get("core.paramcfg");
+
+                JObject o = JObject.Parse(r);
+
+                bool IsKey = (bool)o["IsKey"];
+
+                if (IsKey == null)
+                {
+                    IsKey = false;
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return false;
         }
     }
 }
