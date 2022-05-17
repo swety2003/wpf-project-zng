@@ -15,9 +15,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using WPF_Project.API;
 using WPF_Project.Common;
 using WPF_Project.Dialogs;
 using WPF_Project.Pages;
+using WPF_Project.Utils;
 using WpfWidgetDesktop.Utils;
 
 namespace WPF_Project
@@ -201,7 +203,7 @@ namespace WPF_Project
                 //new ToolGetDialog1("系统提示","请刷卡或扫脸登录").ShowDialog();
 
 
-                var d = new UserLogin();
+                var d = new Dialogs.UserLogin();
                 var dr = d.ShowDialog();
                 if (dr == true)
                 {
@@ -230,7 +232,7 @@ namespace WPF_Project
                             var r = new CustomDialog("系统提示", "欢迎你，张三\n 是否快速取还？").ShowDialog();
                             if (r == true)
                             {
-                                StaticValues.MainWindow.NavigateTo(new ToolGet());
+                                StaticValues.MainWindow.NavigateTo(new Pages.ToolGet());
 
                             }
 
@@ -264,8 +266,26 @@ namespace WPF_Project
 
         }
 
+
+        DoorAcc dooracc;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
+            this.cabid = StaticValues.TryGetCabID();
+
+            if (tooldoor != null)
+            {
+                this.dooracc = new DoorAcc(tooldoor.doorIp, tooldoor.doorPort, tooldoor.account, tooldoor.password);
+
+                dooracc.Init();
+
+                dooracc.doorDeploy();
+
+            }
+
+
+
+
             if (SystemType)
             {
                 ChangeBackGround(@"Assets\Key\KeyBg.png");
@@ -279,6 +299,26 @@ namespace WPF_Project
 
 
         }
+
+
+        private string cabid;
+        private ToolDoor.DataType.RowsItem tooldoor;
+        private async Task TryGetDoorInfoAsync()
+        {
+            if (string.IsNullOrEmpty(cabid))
+            {
+                return;
+            }
+            var r = await ToolDoor.Get("1", "10", cabid);
+            var origin = JsonConvert.DeserializeObject<ToolDoor.DataType.Root>(r);
+
+
+            this.tooldoor = new ToolDoor.DataType.RowsItem();
+        }
+
+        
+
+
     }
     public class MainVM:NotifyBase
     {

@@ -22,11 +22,20 @@ namespace WPF_Project.Common
         {
             var r = SettingProvider.Get("core.paramcfg");
 
-            JObject o = JObject.Parse(r);
+            try
+            {
 
-            string cabinetgroupId = (string)o["cabinetgroupId"];
+                JObject o = JObject.Parse(r);
 
-            return cabinetgroupId;
+                string cabinetgroupId = (string)o["cabinetgroupId"];
+
+                return cabinetgroupId;
+
+            }
+            catch
+            {
+                return "";
+            }
         }
 
         public static bool TryGetSysType()
